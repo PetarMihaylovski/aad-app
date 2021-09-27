@@ -17,6 +17,10 @@ const ShopCard = ({navigation, shop}) => {
                     <Text style={styles.seeMoreText}>See Products</Text>
                 </Pressable>
             </View>
+            <Text style={styles.description}
+                  numberOfLines={2}>
+                {shop.description}
+            </Text>
         </View>
     )
         ;

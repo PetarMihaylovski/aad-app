@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         fontSize:16,
         color: 'blue'
+    },
+    description:{
+        textAlign:'center'
     }
 });
 
