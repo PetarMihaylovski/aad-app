@@ -4,7 +4,7 @@ import shopsInitial from '../../../assets/data/shops.json'
 import ShopCard from "../../components/ShopCard";
 import styles from "./styles";
 
-const ShopsHomePage = ({}) => {
+const ShopsHomePage = ({navigation}) => {
     const [shops, setShops] = useState(shopsInitial);
 
     return (
