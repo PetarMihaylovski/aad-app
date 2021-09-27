@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {View, FlatList, Pressable} from "react-native";
 import shopsInitial from '../../../assets/data/shops.json'
 import ShopCard from "../../components/ShopCard";
@@ -12,10 +12,12 @@ const ShopsHomePage = ({navigation}) => {
             <FlatList
                 data={shops}
                 renderItem={({item}) =>
-                    <Pressable onPress={()=> {
-                        //TODO: implement screen navigation
+                    <Pressable onPress={() => {
+                        navigation.push("Products Page", {
+                            shop: item
+                        });
                     }}>
-                        <ShopCard shop={item}/>
+                        <ShopCard shop={item} navigation={navigation} />
                     </Pressable>
                 }
                 keyExtractor={item => item.id.toString() + item.name}

@@ -2,6 +2,7 @@ import React from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import ShopsHomePage from "../screens/ShopsHomePage";
+import ProductsPage from "../screens/ProductsPage";
 
 
 const Stack = createStackNavigator();
@@ -11,19 +12,19 @@ const Router = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
-                    name={"Home Screen"}
+                    name={"Home Page"}
                     component={ShopsHomePage}
                     options={{
                         title: "Shops Available",
                     }}
                 />
-                {/*<Stack.Screen*/}
-                {/*    name={"Edit Party"}*/}
-                {/*    component={PartyDetailsScreen}*/}
-                {/*    options={{*/}
-                {/*        title: "Edit a Party",*/}
-                {/*    }}*/}
-                {/*/>*/}
+                <Stack.Screen
+                    name={"Products Page"}
+                    component={ProductsPage}
+                    options={{
+                        title: "Products for *insert shop name*",
+                    }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
