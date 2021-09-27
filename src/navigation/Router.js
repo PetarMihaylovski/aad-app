@@ -11,13 +11,13 @@ const Router = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen
-                    name={"Home Page"}
-                    component={ShopsHomePage}
-                    options={{
-                        title: "Shops Available",
-                    }}
-                />
+                {/*<Stack.Screen*/}
+                {/*    name={"Home Page"}*/}
+                {/*    component={ShopsHomePage}*/}
+                {/*    options={{*/}
+                {/*        title: "Shops Available",*/}
+                {/*    }}*/}
+                {/*/>*/}
                 <Stack.Screen
                     name={"Products Page"}
                     component={ProductsPage}

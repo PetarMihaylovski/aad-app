@@ -1,13 +1,15 @@
 import React from "react";
-import {Text} from "react-native";
+import {Text, View} from "react-native";
+import styles from "./styles";
+import ProductCard from "../../components/ProductCard";
 
-const ProductsPage = ({navigation, route}) =>{
-    const shop = route.params.shop;
+const ProductsPage = ({navigation, route}) => {
 
     return (
-        <>
-            <Text>We are here from {shop.name}</Text>
-        </>
+        <ProductCard/>
+
+        // <View styel={styles.container}>
+        // </View>
     );
 }
 
