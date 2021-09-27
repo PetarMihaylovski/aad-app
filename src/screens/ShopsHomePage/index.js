@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, FlatList} from "react-native";
+import {View, FlatList, Pressable} from "react-native";
 import shopsInitial from '../../../assets/data/shops.json'
 import ShopCard from "../../components/ShopCard";
 import styles from "./styles";
@@ -12,8 +12,11 @@ const ShopsHomePage = ({}) => {
             <FlatList
                 data={shops}
                 renderItem={({item}) =>
-
-                    <ShopCard shop={item}/>
+                    <Pressable onPress={()=> {
+                        //TODO: implement screen navigation
+                    }}>
+                        <ShopCard shop={item}/>
+                    </Pressable>
                 }
                 keyExtractor={item => item.id.toString() + item.name}
             />
