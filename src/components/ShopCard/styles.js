@@ -4,17 +4,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        height: '40%',
+        height: 250,
         width: '90%',
-        borderWidth:1,
-        borderColor:'#000000'
+        marginVertical:10,
+        borderBottomWidth:1,
+        borderBottomColor:'lightgray',
+        justifyContent:'center'
     },
     image:{
-        aspectRatio:3/2,
+        aspectRatio:16/9,
         borderRadius: 20,
     },
     textContainer:{
-        marginTop:20,
+        marginTop:10,
         justifyContent:'center',
         alignItems: 'center'
     },

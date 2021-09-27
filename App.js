@@ -11,7 +11,9 @@ export default function App() {
         <View style={styles.container}>
             <FlatList
                 data={shops}
-                renderItem={({item}) => <ShopCard shop={item}/>}
+                renderItem={({item}) =>
+                        <ShopCard shop={item}/>
+                }
                 keyExtractor={item => item.id.toString()}
             />
 
@@ -23,6 +25,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        margin: 10
+        margin: 20,
+        marginVertical:40,
     }
 });
