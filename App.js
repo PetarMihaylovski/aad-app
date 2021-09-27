@@ -1,21 +1,12 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, FlatList} from "react-native";
-import shopsInitial from './assets/data/shops.json'
+import React from "react";
+import {StyleSheet, View} from "react-native";
+import ShopsHomePage from "./src/screens/ShopsHomePage";
 
-import ShopCard from "./src/components/ShopCard";
 
 export default function App() {
-    const [shops, setShops] = useState(shopsInitial);
-
     return (
         <View style={styles.container}>
-            <FlatList
-                data={shops}
-                renderItem={({item}) =>
-                        <ShopCard shop={item}/>
-                }
-                keyExtractor={item => item.id.toString() + item.name}
-            />
+            <ShopsHomePage/>
         </View>
     );
 }
