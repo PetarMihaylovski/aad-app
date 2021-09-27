@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Second hand shop",
+    "imageURI": "https://i.picsum.photos/id/418/300/200.jpg?hmac=_nF8-Wr4uJzTcMpTPNdWCz4RTJ6Y1zk12u1Fs1XDz40"
+  },
+  {
+    "id": 2,
+    "name": "First hand shop",
+    "imageURI": "https://i.picsum.photos/id/1031/300/200.jpg?hmac=GPHPyeU_9Qo8HfSlKvb8fFdV2TUGLqecnu-UIPTgasc"
+  },
+  {
+    "id": 3,
+    "name": "Third hand shop",
+    "imageURI": "https://i.picsum.photos/id/345/300/200.jpg?hmac=rcdf4o67jXiXTAX39BtL_XsVlxm-FXvkGZJmP3fVC20"
+  },
+  {
+    "id":4,
+    "name": "Skate Shop",
+    "imageURI": "https://i.picsum.photos/id/76/300/200.jpg?hmac=XD9K1uiD_PfTLQAMZ-DDh7agT-HwI3DtIcdNjyKk_GM"
+  }
+]

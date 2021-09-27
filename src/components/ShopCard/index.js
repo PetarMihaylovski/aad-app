@@ -2,13 +2,13 @@ import React from 'react'
 import {Text, View, Image} from 'react-native';
 import styles from "./styles";
 
-const ShopCard = ({}) => {
+const ShopCard = ({shop}) => {
     return (
         <View style={styles.container}>
             <Image style={styles.image}
-                   source={{uri: "https://i.picsum.photos/id/418/300/200.jpg?hmac=_nF8-Wr4uJzTcMpTPNdWCz4RTJ6Y1zk12u1Fs1XDz40"}}/>
+                   source={{uri: shop.imageURI}}/>
             <View style={styles.textContainer}>
-                <Text style={styles.shopName}>The best shop around!</Text>
+                <Text style={styles.shopName}>{shop.name}</Text>
             </View>
         </View>
     );
