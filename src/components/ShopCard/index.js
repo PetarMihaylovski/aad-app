@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, Pressable} from 'react-native';
 import styles from "./styles";
 
 const ShopCard = ({shop}) => {
@@ -9,9 +9,15 @@ const ShopCard = ({shop}) => {
                    source={{uri: shop.imageURI}}/>
             <View style={styles.textContainer}>
                 <Text style={styles.shopName}>{shop.name}</Text>
-            </View>
+                <Pressable onPress={()=>{
+                    //TODO: implement the see products handler
+                }}>
+                    <Text style={styles.seeMoreText}>See Products</Text>
+                </Pressable>
         </View>
-    );
+</View>
+)
+    ;
 }
 
 export default ShopCard;

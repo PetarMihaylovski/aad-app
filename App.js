@@ -14,9 +14,8 @@ export default function App() {
                 renderItem={({item}) =>
                         <ShopCard shop={item}/>
                 }
-                keyExtractor={item => item.id.toString()}
+                keyExtractor={item => item.id.toString() + item.name}
             />
-
         </View>
     );
 }
@@ -24,7 +23,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '100%',
+        height: '90%',
         margin: 20,
         marginVertical:40,
     }
