@@ -7,13 +7,6 @@ import styles from "./styles";
 const ShopsHomePage = ({navigation}) => {
     const [shops, setShops] = useState(shopsInitial);
 
-    useEffect(() => {
-        //TODO: here fetch data from the API itself
-        navigation.setOptions({
-            title: "Shops Available: " + shops.length,
-        });
-    }, []);
-
     return (
         <View style={styles.container}>
             <FlatList

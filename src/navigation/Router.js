@@ -1,9 +1,9 @@
 import React from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
-import ShopsHomePage from "../screens/ShopsHomePage";
-import ProductsPage from "../screens/ProductsPage";
-import BottoomTabNavigatior from "./BottomTabNavigator";
+import ShopsHomePage from "../screens/ShopsHomeScreen";
+import BottomTabNavigator from "./BottomTabNavigator";
+import ProductsNavigator from "./ProductsNavigator";
 
 const Stack = createStackNavigator();
 
@@ -12,8 +12,8 @@ const Router = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen
-                    name={"Home"}
-                    component={BottoomTabNavigatior}
+                    name={"Test"}
+                    component={BottomTabNavigator}
                     options={{
                         headerShown: false
                     }}
@@ -24,7 +24,7 @@ const Router = () => {
                 />
                 <Stack.Screen
                     name={"Products Page"}
-                    component={ProductsPage}
+                    component={ProductsNavigator}
                 />
             </Stack.Navigator>
         </NavigationContainer>
