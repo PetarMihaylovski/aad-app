@@ -33,6 +33,30 @@ const styles = StyleSheet.create({
     },
     image: {
         aspectRatio: 4 / 3
+    },
+    inputsContainer:{
+        borderBottomWidth:1,
+        borderBottomColor:'lightgray'
+    },
+    nameContainer:{
+        marginVertical: 10
+    },
+    inputTitle:{
+        marginBottom:5,
+    },
+    nameInput:{
+        height: 40,
+        width: '100%',
+        borderWidth: 1,
+        borderRadius: 10,
+        padding: 10,
+    },
+    descriptionInput:{
+        width: '100%',
+        height: 100,
+            borderWidth: 1,
+        borderRadius: 10,
+        padding: 10,
     }
 });
 
