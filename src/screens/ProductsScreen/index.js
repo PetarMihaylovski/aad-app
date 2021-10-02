@@ -4,7 +4,7 @@ import styles from "./styles";
 import ProductCard from "../../components/ProductCard";
 import productsInitial from "../../../assets/data/products.json"
 
-const ProductsPage = ({navigation, route}) => {
+const ProductsScreen = ({navigation, route}) => {
     const shop = route.params.shop;
     const [products, setProducts] = useState(productsInitial)
 
@@ -28,4 +28,4 @@ const ProductsPage = ({navigation, route}) => {
     );
 }
 
-export default ProductsPage;
+export default ProductsScreen;
