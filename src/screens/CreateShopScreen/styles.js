@@ -4,8 +4,7 @@ const styles = StyleSheet.create({
     container: {
         width: '90%',
         height: "90%",
-        margin: 20,
-        marginTop: 40,
+        marginHorizontal: 20,
     },
     uploadImageContainer: {
         flexDirection: 'row',
@@ -30,17 +29,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderBottomWidth: 1,
         borderBottomColor: 'lightgray',
-        paddingBottom: 10
+        paddingBottom: 10,
     },
     image: {
-        aspectRatio: 4 / 3
+        aspectRatio: 3 / 2
     },
     inputsContainer: {
         borderBottomWidth: 1,
         borderBottomColor: 'lightgray'
     },
     nameContainer: {
-        marginVertical: 10
+        marginVertical: 5
     },
     inputTitle: {
         marginBottom: 5,
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     },
     descriptionInput: {
         width: '100%',
-        height: 100,
+        height: 80,
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,

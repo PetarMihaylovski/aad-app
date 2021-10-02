@@ -1,5 +1,5 @@
 import React from "react";
-import {FlatList, Text, View, Image, Pressable, TextInput} from "react-native";
+import {Text, View, Image, Pressable, TextInput} from "react-native";
 import styles from "./styles";
 
 const CreateShopScreen = () => {
@@ -40,7 +40,7 @@ const CreateShopScreen = () => {
                 <Text style={{
                     fontSize:18,
                     textAlign: 'center',
-                    marginVertical: 10,
+                    marginVertical: 2,
                     fontWeight:'bold'
                 }}>or</Text>
                 <View style={styles.rowContainer}>
