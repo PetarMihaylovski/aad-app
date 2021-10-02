@@ -5,7 +5,7 @@ import shopsInitial from '../../../assets/data/shops.json'
 import ShopCard from "../../components/ShopCard";
 import styles from "./styles";
 
-const ShopsHomeScreen = ({}) => {
+const ShopsScreen = ({}) => {
     const [shops, setShops] = useState(shopsInitial);
     const navigation = useNavigation();
 
@@ -36,4 +36,4 @@ const ShopsHomeScreen = ({}) => {
     );
 };
 
-export default ShopsHomeScreen;
+export default ShopsScreen;
