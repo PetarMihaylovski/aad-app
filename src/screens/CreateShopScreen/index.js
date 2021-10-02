@@ -6,10 +6,10 @@ const CreateShopScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.uploadImageContainer}>
-                <Text style={styles.uploadText}>Store Front Picture</Text>
-                <Pressable style={styles.uploadButton}
+                <Text style={styles.buttonText}>Store Front Picture</Text>
+                <Pressable style={styles.button}
                            onPress={() => console.warn("be patient, it would be implemented")}>
-                    <Text style={styles.uploadText}>UPLOAD</Text>
+                    <Text style={styles.buttonText}>UPLOAD</Text>
                 </Pressable>
             </View>
             <View style={styles.imageContainer}>
@@ -27,6 +27,28 @@ const CreateShopScreen = () => {
                     <TextInput style={styles.descriptionInput}
                                multiline={true}
                                numberOfLines={3}/>
+                </View>
+            </View>
+            <View style={styles.bottomButtonsContainer}>
+                <View style={styles.rowContainer}>
+                    <Text style={styles.importText}>Import Products From CSV</Text>
+                    <Pressable style={styles.button}
+                               onPress={() => console.warn("COULD be implemented")}>
+                        <Text style={styles.buttonText}>IMPORT</Text>
+                    </Pressable>
+                </View>
+                <Text style={{
+                    fontSize:18,
+                    textAlign: 'center',
+                    marginVertical: 10,
+                    fontWeight:'bold'
+                }}>or</Text>
+                <View style={styles.rowContainer}>
+                    <Text style={styles.importText}>Create Products Yourself</Text>
+                    <Pressable style={styles.button}
+                               onPress={() => console.warn("be patient, it would be implemented")}>
+                        <Text style={styles.buttonText}>CREATE</Text>
+                    </Pressable>
                 </View>
             </View>
         </View>
