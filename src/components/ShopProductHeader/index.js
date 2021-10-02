@@ -2,11 +2,11 @@ import React from "react";
 import {Text, View, Image, Pressable, TextInput} from "react-native";
 import styles from "./styles";
 
-const ShopProductHeader = ({}) => {
+const ShopProductHeader = ({isCreateShop}) => {
     return (
         <View>
             <View style={styles.uploadImageContainer}>
-                <Text style={styles.buttonText}>Store Front Picture</Text>
+                <Text style={styles.buttonText}>{isCreateShop ? "Store Front Picture" : "Product Picture"}</Text>
                 <Pressable style={styles.button}
                            onPress={() => console.warn("be patient, it would be implemented")}>
                     <Text style={styles.buttonText}>UPLOAD</Text>
@@ -19,7 +19,7 @@ const ShopProductHeader = ({}) => {
             </View>
             <View style={styles.inputsContainer}>
                 <View style={styles.nameContainer}>
-                    <Text style={styles.inputTitle}>Store Name</Text>
+                    <Text style={styles.inputTitle}>{isCreateShop ? "Store Name" : "Product Name"}</Text>
                     <TextInput style={styles.nameInput}/>
                 </View>
                 <View style={styles.nameContainer}>

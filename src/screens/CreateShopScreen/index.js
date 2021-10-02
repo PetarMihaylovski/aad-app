@@ -7,7 +7,7 @@ const CreateShopScreen = () => {
     return (
         <View style={styles.container}>
 
-            <ShopProductHeader/>
+            <ShopProductHeader isCreateShop={true}/>
 
             <View style={styles.bottomButtonsContainer}>
                 <View style={styles.rowContainer}>
