@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
         height: "95%",
         marginHorizontal: 10,
     },
+    saveButton:{
+        marginRight:20
+    },
     bottomButtonsContainer: {
         marginTop: 10,
         borderBottomWidth: 1,
