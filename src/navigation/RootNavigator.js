@@ -4,13 +4,14 @@ import {NavigationContainer} from "@react-navigation/native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Entypo from "react-native-vector-icons/Entypo";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import CreateShopScreen from "../screens/CreateShopScreen";
+import CreateShopScreen from "../screens/create_screens/CreateShopScreen";
 import ShopNavigator from "./ShopNavigator";
+import CreateNavigator from "./CreateNavigator";
 
 const Tab = createBottomTabNavigator();
 
-const HomeScreen = ({name})=>(
-    <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
+const HomeScreen = ({name}) => (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text>{name}</Text>
     </View>
 );
@@ -27,7 +28,7 @@ const RootNavigator = () => {
                             <FontAwesome5 name="home" size={25} color={color}/>
                         )
                     }}>
-                    {()=> <HomeScreen name={"Home Screen"}/> }
+                    {() => <HomeScreen name={"Home Screen"}/>}
                 </Tab.Screen>
 
                 <Tab.Screen
@@ -41,12 +42,13 @@ const RootNavigator = () => {
                     }}
                 />
                 <Tab.Screen
-                    name={"Create Your Personal Shop"}
-                    component={CreateShopScreen}
+                    name={"Create Personal Shop"}
+                    component={CreateNavigator}
                     options={{
                         tabBarIcon: ({color}) => (
                             <FontAwesome5 name="user" size={25} color={color}/>
-                        )
+                        ),
+                        headerShown: false
                     }}
                 />
             </Tab.Navigator>

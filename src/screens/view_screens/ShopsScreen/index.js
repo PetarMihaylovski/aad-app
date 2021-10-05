@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {View, FlatList, Pressable} from "react-native";
 import {useNavigation} from '@react-navigation/native';
-import shopsInitial from '../../../assets/data/shops.json'
-import ShopCard from "../../components/ShopCard";
+import shopsInitial from '../../../../assets/data/shops.json'
+import ShopCard from "../../../components/view_components/ShopCard";
 import styles from "./styles";
 
 const ShopsScreen = ({}) => {
@@ -22,10 +22,7 @@ const ShopsScreen = ({}) => {
                 data={shops}
                 renderItem={({item}) =>
                     <Pressable onPress={() => {
-                        navigation.navigate('Shops', {
-                            screen: 'Products',
-                            params: {shop: item},
-                        });
+                        navigation.push('Products');
                     }}>
                         <ShopCard shop={item} navigation={navigation}/>
                     </Pressable>

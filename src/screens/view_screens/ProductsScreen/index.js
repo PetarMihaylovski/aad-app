@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {FlatList, View} from "react-native";
 import styles from "./styles";
-import ProductCard from "../../components/ProductCard";
-import productsInitial from "../../../assets/data/products.json"
+import ProductCard from "../../../components/view_components/ProductCard";
+import productsInitial from "../../../../assets/data/products.json"
 
 const ProductsScreen = ({navigation, route}) => {
     const shop = route.params.shop;

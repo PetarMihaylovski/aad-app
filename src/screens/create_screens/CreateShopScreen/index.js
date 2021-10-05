@@ -3,7 +3,7 @@ import {Text, View, Pressable} from "react-native";
 import {useNavigation} from "@react-navigation/native"
 import Entypo from "react-native-vector-icons/Entypo";
 import styles from "./styles";
-import ShopProductHeader from "../../components/ShopProductHeader";
+import ShopProductHeader from "../../../components/create_components/ShopProductHeader";
 
 const CreateShopScreen = () => {
     const navigator = useNavigation();
@@ -44,7 +44,9 @@ const CreateShopScreen = () => {
                 <View style={styles.rowContainer}>
                     <Text style={styles.importText}>Create Products Yourself</Text>
                     <Pressable style={styles.button}
-                               onPress={() => console.warn("be patient, it would be implemented")}>
+                               onPress={() => {
+                                   navigator.push('New Products');
+                               }}>
                         <Text style={styles.buttonText}>CREATE</Text>
                     </Pressable>
                 </View>
