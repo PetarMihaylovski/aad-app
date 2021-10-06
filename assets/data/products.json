@@ -4,43 +4,5 @@
     "name" : "Nice T-Shirt",
     "price" : "17,59",
     "imageURI" : "https://i.picsum.photos/id/774/100/100.jpg?hmac=ecKifXlZM3csAuXkIO2A1NYGhUlnE3q_ZUz3Vf74BK4"
-  },{
-    "id" : 4,
-    "name" : "Disgusting T-Shirt with Spots",
-    "price" : "20,85",
-    "imageURI" : "https://i.picsum.photos/id/18/100/100.jpg?hmac=OedHV-WC1S7y_AKkQXqUTjOTdwumY5dWeO53bO0ox2o"
-  },{
-    "id" : 5,
-    "name" : "Expensive Pants VERY",
-    "price" : "3,50",
-    "imageURI" : "https://i.picsum.photos/id/830/100/100.jpg?hmac=OR3tgiXGeiyB2_hcTonA43nlYWGy8qXPBuKWIu114so"
-  },
-  {
-    "id": 6,
-    "name": "Mortal-Combat T-Shirt SuBZeRo",
-    "price": "7.90",
-    "imageURI": "https://i.picsum.photos/id/626/100/100.jpg?hmac=tJ8TAiUwX_FHayxS6IkBV29op4S6Im_KACZlgqfgJok"
-  },{
-    "id" : 7,
-    "name" : "Expensive Pants VERY",
-    "price" : "3,50",
-    "imageURI" : "https://i.picsum.photos/id/830/100/100.jpg?hmac=OR3tgiXGeiyB2_hcTonA43nlYWGy8qXPBuKWIu114so"
-  },
-  {
-    "id": 8,
-    "name": "Mortal-Combat T-Shirt SuBZeRo",
-    "price": "7.90",
-    "imageURI": "https://i.picsum.photos/id/626/100/100.jpg?hmac=tJ8TAiUwX_FHayxS6IkBV29op4S6Im_KACZlgqfgJok"
-  },{
-    "id" : 9,
-    "name" : "Expensive Pants VERY",
-    "price" : "3,50",
-    "imageURI" : "https://i.picsum.photos/id/830/100/100.jpg?hmac=OR3tgiXGeiyB2_hcTonA43nlYWGy8qXPBuKWIu114so"
-  },
-  {
-    "id": 10,
-    "name": "Mortal-Combat T-Shirt SuBZeRo",
-    "price": "7.90",
-    "imageURI": "https://i.picsum.photos/id/626/100/100.jpg?hmac=tJ8TAiUwX_FHayxS6IkBV29op4S6Im_KACZlgqfgJok"
   }
 ]
