@@ -1,8 +1,20 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Text, View, Image, Pressable, TextInput} from "react-native";
 import styles from "./styles";
 
-const ShopProductHeader = ({isCreateShop}) => {
+const ShopProductHeader = ({isCreateShop, handleNameInput, handleDescriptionInput}) => {
+
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+
+    useEffect(() => {
+
+    }, [name]);
+
+    useEffect(() => {
+
+    }, [description]);
+
     return (
         <View>
             <View style={styles.uploadImageContainer}>
@@ -20,13 +32,17 @@ const ShopProductHeader = ({isCreateShop}) => {
             <View style={styles.inputsContainer}>
                 <View style={styles.nameContainer}>
                     <Text style={styles.inputTitle}>{isCreateShop ? "Store Name" : "Product Name"}</Text>
-                    <TextInput style={styles.nameInput}/>
+                    <TextInput style={styles.nameInput}
+                               value={name}
+                               onChangeText={setName}/>
                 </View>
                 <View style={styles.nameContainer}>
                     <Text style={styles.inputTitle}>Description</Text>
                     <TextInput style={styles.descriptionInput}
                                multiline={true}
-                               numberOfLines={3}/>
+                               numberOfLines={3}
+                               value={description}
+                               onChangeText={setDescription}/>
                 </View>
             </View>
         </View>

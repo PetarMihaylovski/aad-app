@@ -19,7 +19,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         width: '75%',
-        marginHorizontal: 30
+        marginHorizontal: 30,
+        borderBottomWidth:1,
+        borderColor:'lightgray'
     },
     inputsWrapper: {
         marginVertical: 7,
