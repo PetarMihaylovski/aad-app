@@ -7,19 +7,44 @@ import React, {useEffect, useState} from "react";
 
 const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
 
+    const [id, setID] = useState(100);
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [stockAvailability, setStockAvailability] = useState('');
     const [category, setCategory] = useState('')
 
-    const handleSaveButtonClick = () =>{
-        toggle();
-        handleNewProduct({
-            name,
-            price,
-            stockAvailability,
-            category
-        });
+    const handleSaveButtonClick = () => {
+        if ( validateProduct()){
+            handleNewProduct({
+                id,
+                name,
+                price,
+                stockAvailability,
+                category
+            });
+            prepNext();
+            toggle();
+        }
+        else{
+            console.warn("All fields should have data!")
+        }
+
+    };
+
+    const prepNext = () => {
+        setID(id + 1);
+        setName('');
+        setPrice('');
+        setStockAvailability('');
+        setCategory('');
+    };
+
+    const validateProduct = () => {
+        // check if user has entered data in all the fields
+        if (!name || !price || !stockAvailability || !category){
+            return false;
+        }
+        return true;
     };
 
     return (

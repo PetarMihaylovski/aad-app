@@ -1,12 +1,15 @@
-import React, {useLayoutEffect} from "react";
+import React, {useLayoutEffect, useState} from "react";
 import {Text, View, Pressable} from "react-native";
-import {useNavigation} from "@react-navigation/native"
+import {useNavigation, useRoute} from "@react-navigation/native"
 import Entypo from "react-native-vector-icons/Entypo";
 import styles from "./styles";
 import ShopProductHeader from "../../../components/create_components/ShopProductHeader";
 
 const CreateShopScreen = () => {
     const navigator = useNavigation();
+    const route = useRoute();
+
+    const [products, setProducts] = useState(route.params ? route.params.products : []);
 
     useLayoutEffect(() => {
         navigator.setOptions({
@@ -45,7 +48,9 @@ const CreateShopScreen = () => {
                     <Text style={styles.importText}>Create Products Yourself</Text>
                     <Pressable style={styles.button}
                                onPress={() => {
-                                   navigator.push('New Products');
+                                   navigator.push('New Products', {
+                                       products
+                                   });
                                }}>
                         <Text style={styles.buttonText}>CREATE</Text>
                     </Pressable>

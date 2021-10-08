@@ -5,22 +5,27 @@ import productsInitial from "../../../../assets/data/products.json"
 import ProductView from "../../../components/create_components/ProductViewComponent";
 import CreateProductModal from "../../../components/create_components/CreateProductModal";
 import Entypo from "react-native-vector-icons/Entypo";
-import {useNavigation} from "@react-navigation/native";
+import {useNavigation, useRoute} from "@react-navigation/native";
 
 const PreviewProductScreen = () => {
     const navigator = useNavigation();
+    const route = useRoute();
 
-    const [products, setProducts] = useState(productsInitial);
+    console.log(route.params);
+
+    const [products, setProducts] = useState(route.params ? route.params.products : productsInitial);
     const [isModalVisible, setModalVisibility] = useState(false);
 
     useLayoutEffect(() => {
         navigator.setOptions({
-            headerLeft:() =>null,
+            headerLeft: () => null,
             headerRight: () => (
                 <Pressable
                     style={styles.saveButton}
                     onPress={() => {
-                        console.warn('shop added')
+                        navigator.navigate('Create Shop', {
+                            products
+                        });
                     }}>
                     <Entypo name={'check'} size={24}/>
                 </Pressable>
