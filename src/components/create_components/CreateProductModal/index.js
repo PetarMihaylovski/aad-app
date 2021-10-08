@@ -14,7 +14,7 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
     const [category, setCategory] = useState('')
 
     const handleSaveButtonClick = () => {
-        if ( validateProduct()){
+        if (validateProduct()) {
             handleNewProduct({
                 id,
                 name,
@@ -22,17 +22,15 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
                 stockAvailability,
                 category
             });
-            prepNext();
             toggle();
-        }
-        else{
+            setID(id + 1);
+            clearForm();
+        } else {
             console.warn("All fields should have data!")
         }
-
     };
 
-    const prepNext = () => {
-        setID(id + 1);
+    const clearForm = () => {
         setName('');
         setPrice('');
         setStockAvailability('');
@@ -41,7 +39,7 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
 
     const validateProduct = () => {
         // check if user has entered data in all the fields
-        if (!name || !price || !stockAvailability || !category){
+        if (!name || !price || !stockAvailability || !category) {
             return false;
         }
         return true;
@@ -79,6 +77,7 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
                             onValueChange={(itemValue, itemIndex) =>
                                 setCategory(itemValue)
                             }>
+                            <Picker.Item label="" value=""/>
                             <Picker.Item label="Clothes" value="clothes"/>
                             <Picker.Item label="Shoes" value="shoes"/>
                             <Picker.Item label="Accessories" value="accessories"/>
@@ -87,7 +86,10 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
 
                 </View>
                 <View style={styles.modalButtonContainer}>
-                    <Button title="Discard" onPress={toggle} color='orangered'/>
+                    <Button title="Discard" onPress={() => {
+                        clearForm();
+                        toggle();
+                    }} color='orangered'/>
                     <Button title="Save Changes" onPress={handleSaveButtonClick}/>
                 </View>
             </View>

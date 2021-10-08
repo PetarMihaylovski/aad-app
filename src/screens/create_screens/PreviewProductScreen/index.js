@@ -1,7 +1,6 @@
-import React, {useLayoutEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import {FlatList, Text, View, Pressable} from "react-native";
 import styles from "./styles";
-import productsInitial from "../../../../assets/data/products.json"
 import ProductView from "../../../components/create_components/ProductViewComponent";
 import CreateProductModal from "../../../components/create_components/CreateProductModal";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -10,10 +9,10 @@ import {useNavigation, useRoute} from "@react-navigation/native";
 const PreviewProductScreen = () => {
     const navigator = useNavigation();
     const route = useRoute();
+    const saveProduct = route.params.saveProduct;
+    const existingProducts = route.params.products;
 
-    console.log(route.params);
-
-    const [products, setProducts] = useState(route.params ? route.params.products : productsInitial);
+    const [products, setProducts] = useState(existingProducts);
     const [isModalVisible, setModalVisibility] = useState(false);
 
     useLayoutEffect(() => {
@@ -23,9 +22,7 @@ const PreviewProductScreen = () => {
                 <Pressable
                     style={styles.saveButton}
                     onPress={() => {
-                        navigator.navigate('Create Shop', {
-                            products
-                        });
+                        navigator.navigate('Create Shop');
                     }}>
                     <Entypo name={'check'} size={24}/>
                 </Pressable>
@@ -37,8 +34,11 @@ const PreviewProductScreen = () => {
         setModalVisibility(!isModalVisible);
     };
 
-    const handleNewProduct = (e) => {
-        setProducts([...products, e]);
+    const handleNewProduct = (product) => {
+        // save products to the shop
+        saveProduct(product);
+        // save products to the local display array
+        setProducts(prevState=> [...prevState, product]);
     };
 
     return (

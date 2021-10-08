@@ -2,6 +2,7 @@ import React, {useLayoutEffect, useState} from "react";
 import {Text, View, Pressable} from "react-native";
 import {useNavigation, useRoute} from "@react-navigation/native"
 import Entypo from "react-native-vector-icons/Entypo";
+import productsInitial from "../../../../assets/data/products.json"
 import styles from "./styles";
 import ShopProductHeader from "../../../components/create_components/ShopProductHeader";
 
@@ -9,7 +10,8 @@ const CreateShopScreen = () => {
     const navigator = useNavigation();
     const route = useRoute();
 
-    const [products, setProducts] = useState(route.params ? route.params.products : []);
+
+    const [products, setProducts] = useState(route.params ? route.params.products : productsInitial);
 
     useLayoutEffect(() => {
         navigator.setOptions({
@@ -24,6 +26,12 @@ const CreateShopScreen = () => {
             ),
         });
     }, []);
+
+    const saveProduct = (p) => {
+        setProducts(prevState => {
+            return [...prevState, p];
+        });
+    };
 
     return (
         <View style={styles.container}>
@@ -49,7 +57,8 @@ const CreateShopScreen = () => {
                     <Pressable style={styles.button}
                                onPress={() => {
                                    navigator.push('New Products', {
-                                       products
+                                       products,
+                                       saveProduct
                                    });
                                }}>
                         <Text style={styles.buttonText}>CREATE</Text>
