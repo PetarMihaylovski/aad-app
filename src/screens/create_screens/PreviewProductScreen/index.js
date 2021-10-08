@@ -14,14 +14,6 @@ const PreviewProductScreen = () => {
         setModalVisibility(!isModalVisible);
     };
 
-    const handleNameInput = ()=>{
-
-    };
-
-    const handleDescriptionInput = ()=>{
-
-    };
-
     return (
         <View style={styles.container}>
             <FlatList

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     modalButtonContainer: {
         marginTop: 'auto',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
 });
 

@@ -3,20 +3,27 @@ import {Button, Text, TextInput, View} from "react-native";
 import styles from "./styles";
 import ShopProductHeader from "../ShopProductHeader";
 import {Picker} from "@react-native-picker/picker";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
-const CreateProductModal = ({isVisible, toggle})=>{
+const CreateProductModal = ({isVisible, toggle}) => {
 
+    const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [stockAvailability, setStockAvailability] = useState('');
-    const [category, setCategory] = useState("test")
+    const [category, setCategory] = useState('')
+
+    const handleSaveButtonClick = () =>{
+        toggle();
+    };
 
     return (
         <Modal isVisible={isVisible}
                onBackdropPress={toggle}>
             <View style={styles.modalContainer}>
                 <View>
-                    <ShopProductHeader isCreateShop={false}/>
+                    <ShopProductHeader isCreateShop={false}
+                                       name={name}
+                                       setName={setName}/>
                     <View style={styles.modalWrapper}>
                         <View style={styles.inputsWrapper}>
                             <Text style={styles.text}>Price</Text>
@@ -50,7 +57,7 @@ const CreateProductModal = ({isVisible, toggle})=>{
                 </View>
                 <View style={styles.modalButtonContainer}>
                     <Button title="Discard" onPress={toggle} color='orangered'/>
-                    <Button title="Save Changes" onPress={toggle}/>
+                    <Button title="Save Changes" onPress={(handleSaveButtonClick)}/>
                 </View>
             </View>
         </Modal>

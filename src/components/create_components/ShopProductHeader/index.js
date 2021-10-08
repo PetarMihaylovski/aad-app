@@ -2,18 +2,9 @@ import React, {useEffect, useState} from "react";
 import {Text, View, Image, Pressable, TextInput} from "react-native";
 import styles from "./styles";
 
-const ShopProductHeader = ({isCreateShop, handleNameInput, handleDescriptionInput}) => {
+const ShopProductHeader = ({isCreateShop, name,setName}) => {
 
-    const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-
-    useEffect(() => {
-
-    }, [name]);
-
-    useEffect(() => {
-
-    }, [description]);
 
     return (
         <View>
@@ -36,6 +27,7 @@ const ShopProductHeader = ({isCreateShop, handleNameInput, handleDescriptionInpu
                                value={name}
                                onChangeText={setName}/>
                 </View>
+                {isCreateShop &&
                 <View style={styles.nameContainer}>
                     <Text style={styles.inputTitle}>Description</Text>
                     <TextInput style={styles.descriptionInput}
@@ -44,6 +36,7 @@ const ShopProductHeader = ({isCreateShop, handleNameInput, handleDescriptionInpu
                                value={description}
                                onChangeText={setDescription}/>
                 </View>
+                }
             </View>
         </View>
     );
