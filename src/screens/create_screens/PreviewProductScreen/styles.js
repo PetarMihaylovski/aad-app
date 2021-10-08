@@ -7,7 +7,9 @@ const styles = StyleSheet.create({
         margin: 10,
         marginTop: 30
     },
-
+    saveButton:{
+        marginRight:20
+    },
     buttonText: {
         fontWeight: 'bold',
         fontSize: 14
