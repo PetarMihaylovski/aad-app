@@ -5,7 +5,7 @@ import ShopProductHeader from "../ShopProductHeader";
 import {Picker} from "@react-native-picker/picker";
 import React, {useEffect, useState} from "react";
 
-const CreateProductModal = ({isVisible, toggle}) => {
+const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
@@ -14,6 +14,12 @@ const CreateProductModal = ({isVisible, toggle}) => {
 
     const handleSaveButtonClick = () =>{
         toggle();
+        handleNewProduct({
+            name,
+            price,
+            stockAvailability,
+            category
+        });
     };
 
     return (
@@ -57,7 +63,7 @@ const CreateProductModal = ({isVisible, toggle}) => {
                 </View>
                 <View style={styles.modalButtonContainer}>
                     <Button title="Discard" onPress={toggle} color='orangered'/>
-                    <Button title="Save Changes" onPress={(handleSaveButtonClick)}/>
+                    <Button title="Save Changes" onPress={handleSaveButtonClick}/>
                 </View>
             </View>
         </Modal>

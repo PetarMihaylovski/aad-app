@@ -14,17 +14,24 @@ const PreviewProductScreen = () => {
         setModalVisibility(!isModalVisible);
     };
 
+    const handleNewProduct = (e) => {
+        setProducts([...products, e]);
+    };
+
     return (
         <View style={styles.container}>
             <FlatList
                 data={products}
+                extraData={products}
                 renderItem={({item}) => (
                     <ProductView product={item}/>
                 )}
                 keyExtractor={(item => item.id + item.name)}>
             </FlatList>
 
-            <CreateProductModal isVisible={isModalVisible} toggle={toggleModal}/>
+            <CreateProductModal isVisible={isModalVisible}
+                                toggle={toggleModal}
+                                handleNewProduct={handleNewProduct}/>
 
             <View>
                 <Pressable style={styles.button}
