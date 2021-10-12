@@ -5,12 +5,14 @@ import Entypo from "react-native-vector-icons/Entypo";
 import productsInitial from "../../../../assets/data/products.json"
 import styles from "./styles";
 import ShopProductHeader from "../../../components/create_components/ShopProductHeader";
+import {shopStore} from "../../../store/shop";
 
 const CreateShopScreen = () => {
     const navigator = useNavigation();
     const route = useRoute();
 
-
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
     const [products, setProducts] = useState(route.params ? route.params.products : productsInitial);
 
     useLayoutEffect(() => {
@@ -19,7 +21,15 @@ const CreateShopScreen = () => {
                 <Pressable
                     style={styles.saveButton}
                     onPress={() => {
-                        console.warn('shop added')
+                        shopStore.addShop({
+                            id : Math.random(),
+                            name,
+                            description,
+                            products
+                        });
+                        console.warn("shop added");
+                        navigator.navigate('Home Screen');
+                        resetFields();
                     }}>
                     <Entypo name={'check'} size={24}/>
                 </Pressable>
@@ -33,10 +43,20 @@ const CreateShopScreen = () => {
         });
     };
 
+    const resetFields = () => {
+      setName('');
+      setDescription('');
+    };
+
     return (
         <View style={styles.container}>
 
-            <ShopProductHeader isCreateShop={true}/>
+            <ShopProductHeader isCreateShop={true}
+                               name={name}
+                               setName={setName}
+                               description={description}
+                               setDescription={setDescription}
+            />
 
             <View style={styles.bottomButtonsContainer}>
                 <View style={styles.rowContainer}>

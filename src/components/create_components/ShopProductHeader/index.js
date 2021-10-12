@@ -2,9 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Text, View, Image, Pressable, TextInput} from "react-native";
 import styles from "./styles";
 
-const ShopProductHeader = ({isCreateShop, name,setName}) => {
-
-    const [description, setDescription] = useState('')
+const ShopProductHeader = ({isCreateShop, name, setName, description, setDescription}) => {
 
     return (
         <View>
