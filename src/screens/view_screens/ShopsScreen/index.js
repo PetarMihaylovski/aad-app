@@ -17,19 +17,19 @@ const ShopsScreen = ({}) => {
 
     return (
         <View style={styles.container}>
-            <Observer> {()=>
+            <Observer>{() => (
                 <FlatList
                     data={shopStore.shops}
                     renderItem={({item}) =>
                         <Pressable onPress={() => {
-                            navigation.push('Products', {shop:item});
+                            navigation.push('Products', {shop: item});
                         }}>
                             <ShopCard shop={item} navigation={navigation}/>
                         </Pressable>
                     }
                     keyExtractor={item => item.id.toString() + item.name}
                 />
-            }
+            )}
             </Observer>
         </View>
     );
