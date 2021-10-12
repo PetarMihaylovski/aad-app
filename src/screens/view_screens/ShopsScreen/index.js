@@ -22,7 +22,7 @@ const ShopsScreen = ({}) => {
                 data={shops}
                 renderItem={({item}) =>
                     <Pressable onPress={() => {
-                        navigation.push('Products');
+                        navigation.push('Products', {shop:item});
                     }}>
                         <ShopCard shop={item} navigation={navigation}/>
                     </Pressable>
