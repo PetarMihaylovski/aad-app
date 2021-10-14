@@ -16,6 +16,10 @@ class ShopStore {
         this.shops = [...this.shops, shop];
     }
 
+    initShops(shops) {
+        this.shops = shops;
+    }
+
     async getShopsFromAPI() {
         await axios.get('http://10.0.2.2:8000/api/shops', {
             headers: {
@@ -26,7 +30,7 @@ class ShopStore {
             .then((response) => {
                 // handle success
                 if (response.status === 200) {
-                    shopStore.shops = response.data.map((shop) => {
+                    shopStore.initShops(response.data.map((shop) => {
                         return {
                             id: shop.id,
                             name: shop.name,
@@ -35,7 +39,7 @@ class ShopStore {
                             imageURI: shop.image_url,
                             createdAt: shop.created_at
                         };
-                    });
+                    }));
                 }
             })
             .catch((error) => {
