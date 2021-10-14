@@ -22,20 +22,28 @@ const CreateShopScreen = () => {
                     style={styles.saveButton}
                     onPress={() => {
                         shopStore.addShop({
-                            id : Math.random(),
+                            id: Math.random(),
                             name,
                             description,
                             products
                         });
                         console.warn("shop added");
                         navigator.navigate('Home Screen');
-                        resetFields();
                     }}>
                     <Entypo name={'check'} size={24}/>
                 </Pressable>
             ),
         });
-    }, []);
+        // not the most optimal solution since it causes the button to reload every time
+        // a name or description character is called, but I spent 7 hours to figure it out :D
+    }, [name, description]);
+
+    const handleNameInput = (input) => {
+        setName(input);
+    };
+    const handleDescriptionInput = (input) => {
+        setDescription(input);
+    };
 
     const saveProduct = (p) => {
         setProducts(prevState => {
@@ -43,19 +51,11 @@ const CreateShopScreen = () => {
         });
     };
 
-    const resetFields = () => {
-      setName('');
-      setDescription('');
-    };
-
     return (
         <View style={styles.container}>
-
             <ShopProductHeader isCreateShop={true}
-                               name={name}
-                               setName={setName}
-                               description={description}
-                               setDescription={setDescription}
+                               handleNameInput={handleNameInput}
+                               handleDescriptionInput={handleDescriptionInput}
             />
 
             <View style={styles.bottomButtonsContainer}>
