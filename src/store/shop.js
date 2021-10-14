@@ -39,6 +39,7 @@ class ShopStore {
                 }
             })
             .catch((error) => {
+                //TODO: handle the error appropriately
                 console.log(error);
             });
     }

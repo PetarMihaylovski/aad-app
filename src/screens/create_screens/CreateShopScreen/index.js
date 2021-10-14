@@ -27,8 +27,12 @@ const CreateShopScreen = () => {
                             description,
                             products
                         });
-                        console.warn("shop added");
-                        navigator.navigate('Home Screen');
+                        navigator.reset({
+                            index: 0, routes: [{
+                                name: 'Home Screen'
+                            }]
+                        });
+
                     }}>
                     <Entypo name={'check'} size={24}/>
                 </Pressable>
