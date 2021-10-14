@@ -8,7 +8,8 @@ class ShopStore {
         makeObservable(this, {
             shops: observable,
             addShop: action,
-            getShopsFromAPI: action
+            getShopsFromAPI: action,
+            initShops : action,
         });
     }
 
