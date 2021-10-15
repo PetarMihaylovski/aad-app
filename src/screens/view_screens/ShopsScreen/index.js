@@ -4,22 +4,22 @@ import {useNavigation} from '@react-navigation/native';
 import ShopCard from "../../../components/view_components/ShopCard";
 import styles from "./styles";
 import {Observer} from "mobx-react";
-import {shopStore} from "../../../store/shop";
+import {store} from "../../../store/store";
 
 const ShopsScreen = ({}) => {
     const navigation = useNavigation();
 
     useEffect(() => {
         navigation.setOptions({
-            title: `Shops Available: ${shopStore.shops.length}`
+            title: `Shops Available: ${store.shops.length}`
         });
-    }, []);
+    }, [store.shops]);
 
     return (
         <View style={styles.container}>
             <Observer>{() => (
                 <FlatList
-                    data={shopStore.shops}
+                    data={store.shops}
                     renderItem={({item}) =>
                         <Pressable onPress={() => {
                             navigation.push('Products', {shop: item});

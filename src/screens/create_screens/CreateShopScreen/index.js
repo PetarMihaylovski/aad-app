@@ -5,7 +5,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import productsInitial from "../../../../assets/data/products.json"
 import styles from "./styles";
 import ShopProductHeader from "../../../components/create_components/ShopProductHeader";
-import {shopStore} from "../../../store/shop";
+import {shopStore} from "../../../store/store";
 
 const CreateShopScreen = () => {
     const navigator = useNavigation();

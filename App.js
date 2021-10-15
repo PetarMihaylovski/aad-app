@@ -1,15 +1,15 @@
 import React, {useEffect} from "react";
 import RootNavigator from "./src/navigation/RootNavigator";
 import 'react-native-gesture-handler';
-import {shopStore} from "./src/store/shop";
+import {store} from "./src/store/store";
 
 export default function App() {
-    useEffect(()=>{
-        async function fetchShopData () {
-            await shopStore.getShopsFromAPI();
+    useEffect(() => {
+        async function fetchInitialAPIData() {
+            await store.getShopsFromAPI();
         }
-        fetchShopData();
-    },[]);
+        fetchInitialAPIData();
+    }, []);
 
     return (
         <RootNavigator/>
