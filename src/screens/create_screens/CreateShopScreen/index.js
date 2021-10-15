@@ -44,7 +44,7 @@ const CreateShopScreen = () => {
     }, [name, description]);
 
     useEffect(() => {
-        setShopID(Math.random());
+        setShopID(Math.round(Math.random() * 10000));
 
         // clean up function, whenever the page unmounts
         return () => {

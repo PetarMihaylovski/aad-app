@@ -7,7 +7,6 @@ import React, {useEffect, useState} from "react";
 
 const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
 
-    const [id, setID] = useState(100);
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [stockAvailability, setStockAvailability] = useState('');
@@ -16,18 +15,21 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
     const handleSaveButtonClick = () => {
         if (validateProduct()) {
             handleNewProduct({
-                id,
+                id: Math.round(Math.random() * 10000),
                 name,
                 price,
                 stockAvailability,
                 category
             });
             toggle();
-            setID(id + 1);
             clearForm();
         } else {
             console.warn("All fields should have data!")
         }
+    };
+
+    const handleNameInput = (input) => {
+        setName(input);
     };
 
     const clearForm = () => {
@@ -52,7 +54,7 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
                 <View>
                     <ShopProductHeader isCreateShop={false}
                                        name={name}
-                                       setName={setName}/>
+                                       handleNameInput={handleNameInput}/>
                     <View style={styles.modalWrapper}>
                         <View style={styles.inputsWrapper}>
                             <Text style={styles.text}>Price</Text>
