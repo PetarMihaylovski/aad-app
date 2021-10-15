@@ -1,19 +1,18 @@
-import React, {useLayoutEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import {Text, View, Pressable} from "react-native";
-import {useNavigation, useRoute} from "@react-navigation/native"
+import {useNavigation} from "@react-navigation/native"
 import Entypo from "react-native-vector-icons/Entypo";
-import productsInitial from "../../../../assets/data/products.json"
 import styles from "./styles";
 import ShopProductHeader from "../../../components/create_components/ShopProductHeader";
-import {shopStore} from "../../../store/store";
+import {store} from "../../../store/store";
 
 const CreateShopScreen = () => {
     const navigator = useNavigation();
-    const route = useRoute();
 
+    const [shopID, setShopID] = useState(-1);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [products, setProducts] = useState(route.params ? route.params.products : productsInitial);
+    const [products, setProducts] = useState([]);
 
     useLayoutEffect(() => {
         navigator.setOptions({
@@ -21,12 +20,14 @@ const CreateShopScreen = () => {
                 <Pressable
                     style={styles.saveButton}
                     onPress={() => {
-                        shopStore.addShop({
-                            id: Math.random(),
+                        const shop = {
+                            id: shopID,
                             name,
                             description,
                             products
-                        });
+                        };
+                        store.addShop(shop);
+                        setShopID(shop.id);
                         navigator.reset({
                             index: 0, routes: [{
                                 name: 'Home Screen'
@@ -42,6 +43,15 @@ const CreateShopScreen = () => {
         // a name or description character is called, but I spent 7 hours to figure it out :D
     }, [name, description]);
 
+    useEffect(() => {
+        setShopID(Math.random());
+
+        // clean up function, whenever the page unmounts
+        return () => {
+            store.saveProductsForShop(shopID, products);
+        };
+    }, [])
+
     const handleNameInput = (input) => {
         setName(input);
     };
@@ -51,7 +61,7 @@ const CreateShopScreen = () => {
 
     const saveProduct = (p) => {
         setProducts(prevState => {
-            return [...prevState, p];
+            return [...prevState, {shop_id: shopID, ...p}];
         });
     };
 

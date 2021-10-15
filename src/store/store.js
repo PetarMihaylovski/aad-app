@@ -33,7 +33,7 @@ class Store {
                 if (response.status !== 200) {
                     console.log("API responded with status code: ", response.status);
                 }
-                    const shops = response.data.map((shop) => {
+                const shops = response.data.map((shop) => {
                     return {
                         id: shop.id,
                         name: shop.name,
@@ -59,6 +59,17 @@ class Store {
             }
         });
     }
+
+    saveProductsForShop(shopID, products) {
+        axios.post('http://10.0.2.2:8000/api/products', {products})
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
 }
 
 export const store = new Store();
