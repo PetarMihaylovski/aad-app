@@ -60,16 +60,32 @@ class Store {
         });
     }
 
-    saveProductsForShop(shopID, products) {
-        axios.post('http://10.0.2.2:8000/api/products', {products})
-            .then(function (response) {
-                console.log(response);
+    async saveShop(shop) {
+        console.log('shop: ', shop);
+        await axios.post('http://10.0.2.2:8000/api/shops', shop)
+            .then((response) => {
+                if (response.status !== 201) {
+                    console.log('saving a shop failed with status code: ', response.status);
+                }
+                console.log('shop saved successfully: ', response.data);
+                this.addShop(response.data);
+                return response.data;
             })
-            .catch(function (error) {
-                console.log(error);
+            .catch((error) => {
+                console.log('shop error: ', error);
             });
     }
 
+    saveProductsForShop(products) {
+        console.log('products: ', products);
+        axios.post('http://10.0.2.2:8000/api/products', {products: products})
+            .then((response) => {
+                console.log("Products Saved Successfully");
+            })
+            .catch((error) => {
+                console.log('product error: ', error);
+            });
+    }
 }
 
 export const store = new Store();

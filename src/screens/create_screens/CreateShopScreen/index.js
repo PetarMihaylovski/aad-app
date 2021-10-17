@@ -48,9 +48,18 @@ const CreateShopScreen = () => {
 
         // clean up function, whenever the page unmounts
         return () => {
-            store.saveProductsForShop(shopID, products);
+            //TODO: remove the hardcoded user id and get it from the logged in user
+            const saveShop = async () => {
+                return await store.saveShop({user_id: 1, shopID, name, description});
+            }
+            const savedShop = saveShop();
+            // add the new shop id to the products
+            const prods = products.map(product => {
+                return {shop_id: savedShop.id, ...product}
+            });
+            store.saveProductsForShop(prods);
         };
-    }, [])
+    }, [products]);
 
     const handleNameInput = (input) => {
         setName(input);
@@ -61,7 +70,7 @@ const CreateShopScreen = () => {
 
     const saveProduct = (p) => {
         setProducts(prevState => {
-            return [...prevState, {shop_id: shopID, ...p}];
+            return [...prevState, p];
         });
     };
 
