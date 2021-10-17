@@ -33,6 +33,15 @@ const CreateShopScreen = () => {
             name,
             description,
         };
+
+        /**
+         *  allow me to explain what happens here:
+         *  1) the shop is sent to the API
+         *  2) the API's response (which is the newly created shop) is cached so no need of a new fetch afterwards
+         *  3) then the new shop is passed to the next callback, so its id could be used in the
+         *  product's body and the products could be successfully saved for this shop
+         */
+
         await store.saveShop(shop)
             .then((response) => {
                 if (response.status !== 201) {

@@ -13,8 +13,16 @@ class Store {
         });
     }
 
-    addShop(shop) {
-        this.shops = [...this.shops, shop];
+    addShop(shp) {
+        // modeling the shop object as I want it!
+        const shop = {
+            id: shp.id,
+            name: shp.name,
+            description: shp.description,
+            imageURI: shp.image_url,
+            createdAt: shp.created_at
+        };
+        this.shops = [...this.shops, shp];
     }
 
     initShops(shops) {
