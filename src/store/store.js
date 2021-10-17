@@ -22,7 +22,7 @@ class Store {
     }
 
     async getShopsFromAPI() {
-        await axios.get('http://10.0.2.2:8000/api/shops', {
+        await axios.get('http://10.0.2.2:8001/api/shops', {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Accept': 'application/json'
@@ -52,7 +52,7 @@ class Store {
 
     // function is not async because
     async fetchProductsForShop(shopID) {
-        return await axios.get(`http://10.0.2.2:8000/api/shops/${shopID}/products`, {
+        return await axios.get(`http://10.0.2.2:8001/api/shops/${shopID}/products`, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Accept': 'application/json'
@@ -61,26 +61,16 @@ class Store {
     }
 
     async saveShop(shop) {
-        console.log('shop: ', shop);
-        await axios.post('http://10.0.2.2:8000/api/shops', shop)
-            .then((response) => {
-                if (response.status !== 201) {
-                    console.log('saving a shop failed with status code: ', response.status);
-                }
-                console.log('shop saved successfully: ', response.data);
-                this.addShop(response.data);
-                return response.data;
-            })
-            .catch((error) => {
-                console.log('shop error: ', error);
-            });
+        return await axios.post('http://10.0.2.2:8001/api/shops', shop);
     }
 
-    saveProductsForShop(products) {
-        console.log('products: ', products);
-        axios.post('http://10.0.2.2:8000/api/products', {products: products})
+    async saveProductsForShop(products) {
+        await axios.post('http://10.0.2.2:8001/api/products', products)
             .then((response) => {
-                console.log("Products Saved Successfully");
+                if (response.status !== 201) {
+                    console.log('saving a product failed with status code: ', response.status);
+                }
+                console.log('product saved: ', response.data);
             })
             .catch((error) => {
                 console.log('product error: ', error);

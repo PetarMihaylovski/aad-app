@@ -9,9 +9,8 @@ import {store} from "../../../store/store";
 const CreateShopScreen = () => {
     const navigator = useNavigation();
 
-    const [shopID, setShopID] = useState(-1);
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
+    const [name, setName] = useState('sample name');
+    const [description, setDescription] = useState('sample description');
     const [products, setProducts] = useState([]);
 
     useLayoutEffect(() => {
@@ -19,47 +18,47 @@ const CreateShopScreen = () => {
             headerRight: () => (
                 <Pressable
                     style={styles.saveButton}
-                    onPress={() => {
-                        const shop = {
-                            id: shopID,
-                            name,
-                            description,
-                            products
-                        };
-                        store.addShop(shop);
-                        setShopID(shop.id);
-                        navigator.reset({
-                            index: 0, routes: [{
-                                name: 'Home Screen'
-                            }]
-                        });
-
-                    }}>
+                    onPress={onSave}>
                     <Entypo name={'check'} size={24}/>
                 </Pressable>
             ),
         });
         // not the most optimal solution since it causes the button to reload every time
         // a name or description character is called, but I spent 7 hours to figure it out :D
-    }, [name, description]);
+    }, [name, description, products]);
 
-    useEffect(() => {
-        setShopID(Math.round(Math.random() * 10000));
-
-        // clean up function, whenever the page unmounts
-        return () => {
-            //TODO: remove the hardcoded user id and get it from the logged in user
-            const saveShop = async () => {
-                return await store.saveShop({user_id: 1, shopID, name, description});
-            }
-            const savedShop = saveShop();
-            // add the new shop id to the products
-            const prods = products.map(product => {
-                return {shop_id: savedShop.id, ...product}
-            });
-            store.saveProductsForShop(prods);
+    const onSave = async () => {
+        const shop = {
+            user_id: 1, //TODO: has to be changed whenever login is implemented
+            name,
+            description,
         };
-    }, [products]);
+        await store.saveShop(shop)
+            .then((response) => {
+                if (response.status !== 201) {
+                    console.log('saving a shop failed with status code: ', response.status);
+                }
+                store.addShop(response.data);
+                return response.data;
+            })
+            .then(async (savedShop) => {
+                // adds the db id of the saved shop to the products
+                setProducts(prevState => prevState.map(product => {
+                    product.shop_id = savedShop.id;
+                    return product;
+                }));
+                await store.saveProductsForShop(products);
+            })
+            .catch((error) => {
+                console.log('shop error: ', error);
+            });
+
+        navigator.reset({
+            index: 0, routes: [{
+                name: 'Home Screen'
+            }]
+        });
+    }
 
     const handleNameInput = (input) => {
         setName(input);
