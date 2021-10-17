@@ -9,7 +9,7 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
-    const [stockAvailability, setStockAvailability] = useState('');
+    const [stock, setStock] = useState('');
     const [category, setCategory] = useState('')
 
     const handleSaveButtonClick = () => {
@@ -18,7 +18,7 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
                 id: Math.round(Math.random() * 10000),
                 name,
                 price,
-                stockAvailability,
+                stock,
                 category
             });
             toggle();
@@ -35,13 +35,13 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
     const clearForm = () => {
         setName('');
         setPrice('');
-        setStockAvailability('');
+        setStock('');
         setCategory('');
     };
 
     const validateProduct = () => {
         // check if user has entered data in all the fields
-        if (!name || !price || !stockAvailability || !category) {
+        if (!name || !price || !stock || !category) {
             return false;
         }
         return true;
@@ -67,8 +67,8 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
                             <Text style={styles.text}>Stock Availability</Text>
                             <TextInput style={styles.input}
                                        keyboardType={'numeric'}
-                                       value={stockAvailability}
-                                       onChangeText={setStockAvailability}/>
+                                       value={stock}
+                                       onChangeText={setStock}/>
                         </View>
                     </View>
                     <View>
