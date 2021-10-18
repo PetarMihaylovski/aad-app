@@ -3,7 +3,6 @@ import RootNavigator from "./src/navigation/RootNavigator";
 import 'react-native-gesture-handler';
 import {store} from "./src/store/store";
 import * as ImagePicker from "expo-image-picker";
-import LoginScreen from "./src/screens/auth/Login";
 
 export default function App() {
     useEffect(() => {
@@ -22,8 +21,7 @@ export default function App() {
     }, []);
 
     return (
-        // <RootNavigator/>
-        <LoginScreen/>
+        <RootNavigator/>
     );
 }
 

@@ -5,13 +5,20 @@ import axios from "axios";
 class UserStore {
     user = {};
     token = null;
+    isAuthenticated = false;
 
     constructor() {
         makeObservable(this, {
             user: observable,
             token: observable,
-            login : action
+            isAuthenticated : observable,
+            login : action,
+            authenticated: action
         });
+    }
+
+    authenticated(isAuthenticated){
+        this.isAuthenticated = isAuthenticated;
     }
 
     async login(credentials) {
@@ -29,12 +36,13 @@ class UserStore {
                 if (response.status !== 201) {
                     console.log("API responded with status code: ", response.status);
                 }
-                this.token = response.data.token;
-                this.user = {
+                userStore.token = response.data.token;
+                userStore.user = {
                     email: response.data.user.email,
                     id: response.data.user.id,
                     updatedAt: response.data.user.updated_at
                 };
+                userStore.authenticated(true);
             })
             .catch((error) => {
                 console.log("error while logging in: ", error);
