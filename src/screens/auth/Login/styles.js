@@ -1,0 +1,36 @@
+import {StyleSheet} from "react-native";
+
+const styles = StyleSheet.create({
+    container: {
+        padding : 20,
+        alignItems: 'center'
+    },
+    logo: {
+        width : '70%',
+        maxWidth : 300,
+        maxHeight: 200
+    },
+    inputContainer: {
+        backgroundColor: 'white',
+        width: '100%',
+        borderColor: '#e8e8e8',
+        borderWidth: 1,
+        borderRadius:5,
+        paddingHorizontal: 10,
+        marginVertical:5
+    },
+    forgotContainer: {
+        width: '100%',
+        alignItems: 'flex-end',
+        marginBottom: 24,
+    },
+    loginButton: {
+        backgroundColor:'#3b71f3',
+        justifyContent: 'center',
+        alignItems: "center",
+        padding: 5,
+        width: '80%'
+    },
+});
+
+export default styles;
