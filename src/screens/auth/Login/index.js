@@ -3,6 +3,8 @@ import {Pressable, Image, Text, TextInput, View, useWindowDimensions} from "reac
 import styles from "./styles";
 import image from "../../../../assets/images/alogo-2.png";
 import {emailValidator, passwordValidator} from "../../../validators/validators";
+import {userStore} from "../../../store/userStore";
+
 
 const LoginScreen = ({}) => {
     const {height} = useWindowDimensions();
@@ -17,15 +19,15 @@ const LoginScreen = ({}) => {
         }
     }, [errorState])
 
-    const onLogin = () => {
+    const onLogin = async () => {
         const validEmail = emailValidator(email)
         const validPassword = passwordValidator(password);
 
         if (!validEmail || !validPassword) {
             setErrorState(true);
+            return;
         }
-
-
+        await userStore.login({email, password});
     };
 
     return (
