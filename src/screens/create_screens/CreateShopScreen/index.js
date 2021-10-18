@@ -1,10 +1,11 @@
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useLayoutEffect, useState} from "react";
 import {Text, View, Pressable} from "react-native";
 import {useNavigation} from "@react-navigation/native"
 import Entypo from "react-native-vector-icons/Entypo";
 import styles from "./styles";
 import ShopProductHeader from "../../../components/create_components/ShopProductHeader";
 import {store} from "../../../store/store";
+import * as ImagePicker from "expo-image-picker";
 
 const CreateShopScreen = () => {
     const navigator = useNavigation();
@@ -12,6 +13,7 @@ const CreateShopScreen = () => {
     const [name, setName] = useState('sample name');
     const [description, setDescription] = useState('sample description');
     const [products, setProducts] = useState([]);
+    const [image, setImage] = useState(null);
 
     useLayoutEffect(() => {
         navigator.setOptions({
@@ -25,12 +27,13 @@ const CreateShopScreen = () => {
         });
         // not the most optimal solution since it causes the button to reload every time
         // a name or description character is called, but I spent 7 hours to figure it out :D
-    }, [name, description, products]);
+    }, [name, description, image, products]);
 
     const onSave = async () => {
         const shop = {
             user_id: 1, //TODO: has to be changed whenever login is implemented
             name,
+            image,
             description,
         };
 
@@ -38,7 +41,8 @@ const CreateShopScreen = () => {
          *  allow me to explain what happens here:
          *  1) the shop is sent to the API
          *  2) the API's response (which is the newly created shop) is cached so no need of a new fetch afterwards
-         *  3) then the new shop is passed to the next callback, so its id could be used in the
+         *  3) the image is patched to the new shop
+         *  4) then the new shop is passed to the next callback, so its id could be used in the
          *  product's body and the products could be successfully saved for this shop
          */
 
@@ -70,14 +74,23 @@ const CreateShopScreen = () => {
             }]
         });
     }
-
+    const pickImage = async () => {
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [3, 2],
+            quality: 1,
+        });
+        if (!result.cancelled) {
+            setImage(result);
+        }
+    };
     const handleNameInput = (input) => {
         setName(input);
     };
     const handleDescriptionInput = (input) => {
         setDescription(input);
     };
-
     const saveProduct = (p) => {
         setProducts(prevState => {
             return [...prevState, p];
@@ -87,8 +100,10 @@ const CreateShopScreen = () => {
     return (
         <View style={styles.container}>
             <ShopProductHeader isCreateShop={true}
+                               image={image}
                                handleNameInput={handleNameInput}
                                handleDescriptionInput={handleDescriptionInput}
+                               handleImageInput={pickImage}
             />
 
             <View style={styles.bottomButtonsContainer}>

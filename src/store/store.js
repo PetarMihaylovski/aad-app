@@ -8,7 +8,7 @@ class Store {
     constructor() {
         makeObservable(this, {
             shops: observable,
-            BASE_URL : observable,
+            BASE_URL: observable,
             addShop: action,
             getShopsFromAPI: action,
             initShops: action,

@@ -2,20 +2,40 @@ import React from "react";
 import {Text, View, Image, Pressable, TextInput} from "react-native";
 import styles from "./styles";
 
-const ShopProductHeader = ({isCreateShop, name, description, handleNameInput, handleDescriptionInput}) => {
+/**
+ * eventually this would be split up, but if it is not, i am sorry
+ * @param isCreateShop
+ * @param name
+ * @param description
+ * @param image
+ * @param handleNameInput
+ * @param handleDescriptionInput
+ * @param handleImageInput
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const ShopProductHeader = ({
+                               isCreateShop,
+                               name,
+                               description,
+                               image,
+                               handleNameInput,
+                               handleDescriptionInput,
+                               handleImageInput
+                           }) => {
 
     return (
         <View>
             <View style={styles.uploadImageContainer}>
                 <Text style={styles.buttonText}>{isCreateShop ? "Store Front Picture" : "Product Picture"}</Text>
                 <Pressable style={styles.button}
-                           onPress={() => console.warn("be patient, it would be implemented")}>
+                           onPress={handleImageInput}>
                     <Text style={styles.buttonText}>UPLOAD</Text>
                 </Pressable>
             </View>
             <View style={styles.imageContainer}>
                 <Image style={styles.image}
-                       source={{uri: "https://i.picsum.photos/id/327/500/500.jpg?hmac=9kV_jy-Q_BAHmgMqOTXXJyOc8tWn3V0VS2h9bB8aWk0"}}
+                       source={{uri: image ? image.uri : 'https://i.picsum.photos/id/327/500/500.jpg?hmac=9kV_jy-Q_BAHmgMqOTXXJyOc8tWn3V0VS2h9bB8aWk0'}}
                 />
             </View>
             <View style={styles.inputsContainer}>
