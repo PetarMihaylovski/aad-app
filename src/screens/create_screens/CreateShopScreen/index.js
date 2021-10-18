@@ -10,8 +10,8 @@ import * as ImagePicker from "expo-image-picker";
 const CreateShopScreen = () => {
     const navigator = useNavigation();
 
-    const [name, setName] = useState('sample name');
-    const [description, setDescription] = useState('sample description');
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
     const [products, setProducts] = useState([]);
     const [image, setImage] = useState(null);
 

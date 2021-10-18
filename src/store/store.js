@@ -68,7 +68,23 @@ class Store {
     }
 
     async saveShop(shop) {
-        return await axios.post(`${this.BASE_URL}/api/shops`, shop);
+        const form = new FormData();
+
+        form.append("image_url",    {
+            uri: shop.image.uri,
+            type: 'image/jpeg',
+            name: 'store_image.jpg',
+        });
+        form.append("user_id", shop.user_id);
+        form.append("name", shop.name);
+        form.append("description", shop.description);
+
+        return await axios.post(`${this.BASE_URL}/api/shops`, form, {
+            headers: {
+                'Content-type': 'multipart/form-data',
+                'Accept': 'application/json'
+            }
+        });
     }
 
     async saveProductsForShop(products) {
