@@ -3,10 +3,12 @@ import axios from "axios";
 
 class Store {
     shops = [];
+    BASE_URL = 'http://10.0.2.2:8000';
 
     constructor() {
         makeObservable(this, {
             shops: observable,
+            BASE_URL : observable,
             addShop: action,
             getShopsFromAPI: action,
             initShops: action,
@@ -33,7 +35,7 @@ class Store {
     }
 
     async getShopsFromAPI() {
-        await axios.get('http://10.0.2.2:8000/api/shops', {
+        await axios.get(`${this.BASE_URL}/api/shops`, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Accept': 'application/json'
@@ -57,7 +59,7 @@ class Store {
 
     // function is not async because
     async fetchProductsForShop(shopID) {
-        return await axios.get(`http://10.0.2.2:8000/api/shops/${shopID}/products`, {
+        return await axios.get(`${this.BASE_URL}/api/shops/${shopID}/products`, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Accept': 'application/json'
@@ -66,16 +68,16 @@ class Store {
     }
 
     async saveShop(shop) {
-        return await axios.post('http://10.0.2.2:8000/api/shops', shop);
+        return await axios.post(`${this.BASE_URL}/api/shops`, shop);
     }
 
     async saveProductsForShop(products) {
-        await axios.post('http://10.0.2.2:8000/api/products', products)
+        await axios.post(`${this.BASE_URL}/api/products`, products)
             .then((response) => {
                 if (response.status !== 201) {
                     console.log('saving a product failed with status code: ', response.status);
                 }
-                console.log('product saved: ', response.data);
+                console.log('products saved!');
             })
             .catch((error) => {
                 console.log('product error: ', error);
