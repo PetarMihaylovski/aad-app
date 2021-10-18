@@ -3,7 +3,8 @@ import {Button, Text, TextInput, View} from "react-native";
 import styles from "./styles";
 import ShopProductHeader from "../ShopProductHeader";
 import {Picker} from "@react-native-picker/picker";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
+import {productValidator} from "../../../validators/validators";
 
 const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
 
@@ -13,7 +14,8 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
     const [category, setCategory] = useState('')
 
     const handleSaveButtonClick = () => {
-        if (validateProduct()) {
+        const isValid = productValidator({name, price, stock, category});
+        if (isValid) {
             handleNewProduct({
                 id: Math.round(Math.random() * 10000),
                 name,
@@ -37,14 +39,6 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
         setPrice('');
         setStock('');
         setCategory('');
-    };
-
-    const validateProduct = () => {
-        // check if user has entered data in all the fields
-        if (!name || !price || !stock || !category) {
-            return false;
-        }
-        return true;
     };
 
     return (
