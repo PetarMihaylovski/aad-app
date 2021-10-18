@@ -2,13 +2,14 @@ import React from 'react'
 import {useNavigation} from '@react-navigation/native';
 import {Text, View, Image, Pressable} from 'react-native';
 import styles from "./styles";
+import {store} from "../../../store/store";
 
 const ShopCard = ({shop}) => {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <Image style={styles.image}
-                   source={{uri: shop.imageURI}}/>
+                   source={{uri: store.BASE_URL + shop.imageURI}}/>
             <View style={styles.textContainer}>
                 <Text style={styles.shopName}>{shop.name}</Text>
                 <Pressable onPress={() => {
