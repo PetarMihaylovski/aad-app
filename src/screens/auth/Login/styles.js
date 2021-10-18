@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginBottom: 24,
     },
-    loginButton: {
+    button: {
+        marginVertical: 10,
         backgroundColor:'#3b71f3',
         justifyContent: 'center',
         alignItems: "center",

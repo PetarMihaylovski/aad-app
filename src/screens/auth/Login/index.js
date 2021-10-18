@@ -43,10 +43,16 @@ const LoginScreen = ({}) => {
                 </Pressable>
             </View>
 
-            <Pressable style={styles.loginButton}
+            <Pressable style={styles.button}
                        onPress={() => {
                        }}>
-                <Text style={{color:'white', fontWeight: 'bold'}}>Login</Text>
+                <Text style={{color:'white', fontWeight: 'bold'}}>LOGIN</Text>
+            </Pressable>
+            <Text>or</Text>
+            <Pressable style={styles.button}
+                       onPress={() => {
+                       }}>
+                <Text style={{color:'white', fontWeight: 'bold'}}>REGISTER</Text>
             </Pressable>
         </View>
     );
