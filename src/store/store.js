@@ -13,24 +13,27 @@ class Store {
         });
     }
 
-    addShop(shp) {
-        // modeling the shop object as I want it!
-        const shop = {
-            id: shp.id,
-            name: shp.name,
-            description: shp.description,
-            imageURI: shp.image_url,
-            createdAt: shp.created_at
-        };
-        this.shops = [...this.shops, shp];
+    addShop(shop) {
+        this.shops = [...this.shops, this.remodeledShop(shop)];
     }
 
     initShops(shops) {
         this.shops = shops;
     }
 
+    // modeling the shop object as I want it!
+    remodeledShop = (shop) => {
+        return {
+            id: shop.id,
+            name: shop.name,
+            description: shop.description,
+            imageURI: shop.image_url,
+            createdAt: shop.created_at
+        };
+    }
+
     async getShopsFromAPI() {
-        await axios.get('http://10.0.2.2:8001/api/shops', {
+        await axios.get('http://10.0.2.2:8000/api/shops', {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Accept': 'application/json'
@@ -42,13 +45,7 @@ class Store {
                     console.log("API responded with status code: ", response.status);
                 }
                 const shops = response.data.map((shop) => {
-                    return {
-                        id: shop.id,
-                        name: shop.name,
-                        description: shop.description,
-                        imageURI: shop.image_url,
-                        createdAt: shop.created_at
-                    };
+                    return this.remodeledShop(shop);
                 });
                 store.initShops(shops);
             })
@@ -60,7 +57,7 @@ class Store {
 
     // function is not async because
     async fetchProductsForShop(shopID) {
-        return await axios.get(`http://10.0.2.2:8001/api/shops/${shopID}/products`, {
+        return await axios.get(`http://10.0.2.2:8000/api/shops/${shopID}/products`, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Accept': 'application/json'
@@ -69,11 +66,11 @@ class Store {
     }
 
     async saveShop(shop) {
-        return await axios.post('http://10.0.2.2:8001/api/shops', shop);
+        return await axios.post('http://10.0.2.2:8000/api/shops', shop);
     }
 
     async saveProductsForShop(products) {
-        await axios.post('http://10.0.2.2:8001/api/products', products)
+        await axios.post('http://10.0.2.2:8000/api/products', products)
             .then((response) => {
                 if (response.status !== 201) {
                     console.log('saving a product failed with status code: ', response.status);
