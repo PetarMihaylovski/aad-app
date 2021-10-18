@@ -56,7 +56,9 @@ const CreateShopScreen = () => {
                     product.shop_id = savedShop.id;
                     return product;
                 }));
-                await store.saveProductsForShop(products);
+                if (products.length > 0) {
+                    await store.saveProductsForShop(products);
+                }
             })
             .catch((error) => {
                 console.log('shop error: ', error);
