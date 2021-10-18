@@ -1,14 +1,14 @@
 import {action, makeObservable, observable} from "mobx";
 import axios from "axios";
+import './globalVariables';
+
 
 class Store {
     shops = [];
-    BASE_URL = 'http://10.0.2.2:8000';
 
     constructor() {
         makeObservable(this, {
             shops: observable,
-            BASE_URL: observable,
             addShop: action,
             getShopsFromAPI: action,
             initShops: action,
@@ -35,7 +35,7 @@ class Store {
     }
 
     async getShopsFromAPI() {
-        await axios.get(`${this.BASE_URL}/api/shops`, {
+        await axios.get(`${BASE_URL}/api/shops`, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Accept': 'application/json'
@@ -59,7 +59,7 @@ class Store {
 
     // function is not async because
     async fetchProductsForShop(shopID) {
-        return await axios.get(`${this.BASE_URL}/api/shops/${shopID}/products`, {
+        return await axios.get(`${BASE_URL}/api/shops/${shopID}/products`, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Accept': 'application/json'
@@ -79,7 +79,7 @@ class Store {
         form.append("name", shop.name);
         form.append("description", shop.description);
 
-        return await axios.post(`${this.BASE_URL}/api/shops`, form, {
+        return await axios.post(`${BASE_URL}/api/shops`, form, {
             headers: {
                 'Content-type': 'multipart/form-data',
                 'Accept': 'application/json'
@@ -88,7 +88,7 @@ class Store {
     }
 
     async saveProductsForShop(products) {
-        await axios.post(`${this.BASE_URL}/api/products`, products)
+        await axios.post(`${BASE_URL}/api/products`, products)
             .then((response) => {
                 if (response.status !== 201) {
                     console.log('saving a product failed with status code: ', response.status);
