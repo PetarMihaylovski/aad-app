@@ -71,12 +71,12 @@ const LoginScreen = ({}) => {
                        onPress={onLogin}>
                 <Text style={{color: 'white', fontWeight: 'bold'}}>LOGIN</Text>
             </Pressable>
-            <Text>or</Text>
-            <Pressable style={styles.button}
-                       onPress={() => {
-                       }}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}>REGISTER</Text>
-            </Pressable>
+            <View style={styles.row}>
+                <Text>Don’t have an account? </Text>
+                <Pressable onPress={() => {}}>
+                    <Text style={styles.link}>Register</Text>
+                </Pressable>
+            </View>
         </View>
     );
 }
