@@ -4,9 +4,11 @@ import styles from "./styles";
 import image from "../../../../assets/images/alogo-2.png";
 import {emailValidator, passwordValidator} from "../../../validators/validators";
 import {userStore} from "../../../store/userStore";
+import {useNavigation} from '@react-navigation/native';
 
 
 const RegisterScreen = ({}) => {
+    const navigator = useNavigation();
     const {height} = useWindowDimensions();
 
     const [email, setEmail] = useState('');
@@ -83,7 +85,7 @@ const RegisterScreen = ({}) => {
 
             <View style={styles.row}>
                 <Text>Already have an account? </Text>
-                <Pressable onPress={() => {}}>
+                <Pressable onPress={() => {navigator.navigate('Login')}}>
                     <Text style={styles.link}>Login</Text>
                 </Pressable>
             </View>

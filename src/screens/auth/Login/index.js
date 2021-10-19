@@ -4,9 +4,10 @@ import styles from "./styles";
 import image from "../../../../assets/images/alogo-2.png";
 import {emailValidator, passwordValidator} from "../../../validators/validators";
 import {userStore} from "../../../store/userStore";
-
+import {useNavigation} from '@react-navigation/native';
 
 const LoginScreen = ({}) => {
+    const navigator = useNavigation();
     const {height} = useWindowDimensions();
 
     const [email, setEmail] = useState('');
@@ -60,8 +61,7 @@ const LoginScreen = ({}) => {
 
             <View style={styles.forgotContainer}>
                 <Pressable
-                    onPress={() => {
-                    }}
+                    onPress={() => alert('it wont be implemented, sorry!')}
                 >
                     <Text style={{textDecorationLine: 'underline'}}>Forgot your password?</Text>
                 </Pressable>
@@ -71,9 +71,10 @@ const LoginScreen = ({}) => {
                        onPress={onLogin}>
                 <Text style={{color: 'white', fontWeight: 'bold'}}>LOGIN</Text>
             </Pressable>
+
             <View style={styles.row}>
                 <Text>Don’t have an account? </Text>
-                <Pressable onPress={() => {}}>
+                <Pressable onPress={() => navigator.navigate('Register')}>
                     <Text style={styles.link}>Register</Text>
                 </Pressable>
             </View>

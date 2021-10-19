@@ -1,7 +1,7 @@
 export const emailValidator = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const regExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //correct format of an email
     //returns true if email is valid, returns false otherwise
-    return !(!email || !re.test(email));
+    return !(!email || !regExp.test(email));
 }
 
 export const passwordValidator = (password) => {
@@ -10,7 +10,8 @@ export const passwordValidator = (password) => {
 }
 
 export const usernameValidator = (username) => {
-    return true;
+    const regExp = /^[a-zA-Z\-_]+$/;
+    return !(!username || !regExp.test(username));
 }
 
 export const productValidator = (fields) => {
