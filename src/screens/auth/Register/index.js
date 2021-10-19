@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Pressable, Image, Text, TextInput, View, useWindowDimensions} from "react-native";
 import styles from "./styles";
 import image from "../../../../assets/images/alogo-2.png";
-import {emailValidator, passwordValidator} from "../../../validators/validators";
+import {emailValidator, passwordValidator, usernameValidator} from "../../../validators/validators";
 import {userStore} from "../../../store/userStore";
 import {useNavigation} from '@react-navigation/native';
 import ForgotPassword from "../../../components/auth/ForgotPasswordComponent";
@@ -23,7 +23,8 @@ const RegisterScreen = ({}) => {
         }
     }, [errorState])
 
-    const onLogin = async () => {
+    const onRegister = async () => {
+        const validUsername = usernameValidator(username)
         const validEmail = emailValidator(email)
         const validPassword = passwordValidator(password);
 
@@ -31,7 +32,7 @@ const RegisterScreen = ({}) => {
             setErrorState(true);
             return;
         }
-        await userStore.login({email, password});
+        await userStore.register({username, email, password});
     };
 
     return (
@@ -73,13 +74,15 @@ const RegisterScreen = ({}) => {
             <ForgotPassword/>
 
             <Pressable style={styles.button}
-                       onPress={onLogin}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}>LOGIN</Text>
+                       onPress={onRegister}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>REGISTER</Text>
             </Pressable>
 
             <View style={styles.row}>
                 <Text>Already have an account? </Text>
-                <Pressable onPress={() => {navigator.navigate('Login')}}>
+                <Pressable onPress={() => {
+                    navigator.navigate('Login')
+                }}>
                     <Text style={styles.link}>Login</Text>
                 </Pressable>
             </View>
