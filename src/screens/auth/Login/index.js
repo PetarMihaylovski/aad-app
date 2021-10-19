@@ -6,6 +6,7 @@ import {emailValidator, passwordValidator} from "../../../validators/validators"
 import {userStore} from "../../../store/userStore";
 import {useNavigation} from '@react-navigation/native';
 import ForgotPassword from "../../../components/auth/ForgotPasswordComponent";
+import RememberMeCheckbox from "../../../components/auth/RememberMe";
 
 const LoginScreen = ({}) => {
     const navigator = useNavigation();
@@ -14,6 +15,7 @@ const LoginScreen = ({}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorState, setErrorState] = useState(false);
+    const [storeSession, setStoreSession] = useState(false);
 
     useEffect(() => {
         if (errorState) {
@@ -31,6 +33,10 @@ const LoginScreen = ({}) => {
         }
         await userStore.login({email, password});
     };
+
+    const handleCheckboxClick = (state) => {
+        setStoreSession(state);
+    }
 
     return (
         <View style={styles.container}>
@@ -59,7 +65,10 @@ const LoginScreen = ({}) => {
                 />
             </View>
 
-            <ForgotPassword/>
+            <View style={styles.row}>
+                <RememberMeCheckbox storeSession={storeSession} handler={handleCheckboxClick}/>
+                <ForgotPassword/>
+            </View>
 
             <Pressable style={styles.button}
                        onPress={onLogin}>

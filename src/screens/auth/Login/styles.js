@@ -30,7 +30,9 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
+        alignItems: 'center',
         marginTop: 4,
+        paddingHorizontal: 60,
     },
     link: {
         fontWeight: 'bold',

@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
         height: 40
     },row: {
         flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
         marginTop: 4,
     },
     link: {

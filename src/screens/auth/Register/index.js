@@ -5,8 +5,7 @@ import image from "../../../../assets/images/alogo-2.png";
 import {emailValidator, passwordValidator, usernameValidator} from "../../../validators/validators";
 import {userStore} from "../../../store/userStore";
 import {useNavigation} from '@react-navigation/native';
-import ForgotPassword from "../../../components/auth/ForgotPasswordComponent";
-
+import RememberMeCheckbox from "../../../components/auth/RememberMe";
 
 const RegisterScreen = ({}) => {
     const navigator = useNavigation();
@@ -16,24 +15,29 @@ const RegisterScreen = ({}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorState, setErrorState] = useState(false);
+    const [storeSession, setStoreSession] = useState(false);
 
     useEffect(() => {
         if (errorState) {
             setTimeout(() => setErrorState(false), 5000);
         }
-    }, [errorState])
+    }, [errorState]);
 
     const onRegister = async () => {
         const validUsername = usernameValidator(username)
         const validEmail = emailValidator(email)
         const validPassword = passwordValidator(password);
 
-        if (!validEmail || !validPassword) {
+        if (!validEmail || !validPassword || !validUsername) {
             setErrorState(true);
             return;
         }
         await userStore.register({username, email, password});
     };
+
+    const handleCheckboxClick = (state) => {
+        setStoreSession(state);
+    }
 
     return (
         <View style={styles.container}>
@@ -71,7 +75,9 @@ const RegisterScreen = ({}) => {
                 />
             </View>
 
-            <ForgotPassword/>
+            <View style={styles.row}>
+                <RememberMeCheckbox storeSession={storeSession} handler={handleCheckboxClick}/>
+            </View>
 
             <Pressable style={styles.button}
                        onPress={onRegister}>
