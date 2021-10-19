@@ -5,6 +5,7 @@ import image from "../../../../assets/images/alogo-2.png";
 import {emailValidator, passwordValidator} from "../../../validators/validators";
 import {userStore} from "../../../store/userStore";
 import {useNavigation} from '@react-navigation/native';
+import ForgotPassword from "../../../components/auth/ForgotPasswordComponent";
 
 const LoginScreen = ({}) => {
     const navigator = useNavigation();
@@ -41,7 +42,6 @@ const LoginScreen = ({}) => {
 
             {errorState && <Text>Wrong data!</Text>}
 
-
             <View style={styles.inputContainer}>
                 <Text style={styles.title}>Email</Text>
                 <TextInput style={styles.input}
@@ -59,13 +59,7 @@ const LoginScreen = ({}) => {
                 />
             </View>
 
-            <View style={styles.forgotContainer}>
-                <Pressable
-                    onPress={() => alert('it wont be implemented, sorry!')}
-                >
-                    <Text style={{textDecorationLine: 'underline'}}>Forgot your password?</Text>
-                </Pressable>
-            </View>
+            <ForgotPassword/>
 
             <Pressable style={styles.button}
                        onPress={onLogin}>

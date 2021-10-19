@@ -5,6 +5,7 @@ import image from "../../../../assets/images/alogo-2.png";
 import {emailValidator, passwordValidator} from "../../../validators/validators";
 import {userStore} from "../../../store/userStore";
 import {useNavigation} from '@react-navigation/native';
+import ForgotPassword from "../../../components/auth/ForgotPasswordComponent";
 
 
 const RegisterScreen = ({}) => {
@@ -69,14 +70,7 @@ const RegisterScreen = ({}) => {
                 />
             </View>
 
-            <View style={styles.forgotContainer}>
-                <Pressable
-                    onPress={() => {
-                    }}
-                >
-                    <Text style={{textDecorationLine: 'underline'}}>Forgot your password?</Text>
-                </Pressable>
-            </View>
+            <ForgotPassword/>
 
             <Pressable style={styles.button}
                        onPress={onLogin}>

@@ -19,11 +19,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginVertical:5
     },
-    forgotContainer: {
-        width: '100%',
-        alignItems: 'flex-end',
-        marginBottom: 24,
-    },
     button: {
         marginVertical: 10,
         backgroundColor:'#3b71f3',
