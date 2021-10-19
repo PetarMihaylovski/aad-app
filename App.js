@@ -7,7 +7,7 @@ import * as ImagePicker from "expo-image-picker";
 export default function App() {
     useEffect(() => {
         async function fetchInitialAPIData() {
-            store.getShopsFromAPI();
+            await store.getShopsFromAPI();
         }
         (async () => {
             if (Platform.OS !== 'web') {
