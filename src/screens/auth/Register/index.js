@@ -6,6 +6,7 @@ import {emailValidator, passwordValidator, usernameValidator} from "../../../val
 import {userStore} from "../../../store/userStore";
 import {useNavigation} from '@react-navigation/native';
 import RememberMeCheckbox from "../../../components/auth/RememberMe";
+import * as SecureStore from "expo-secure-store";
 
 const RegisterScreen = ({}) => {
     const navigator = useNavigation();
@@ -32,7 +33,19 @@ const RegisterScreen = ({}) => {
             setErrorState(true);
             return;
         }
-        await userStore.register({username, email, password});
+        userStore.register({username, email, password})
+            .then(async () => {
+                if (storeSession) {
+                    await SecureStore.setItemAsync(SESSION_KEY, JSON.stringify({
+                        user: userStore.user,
+                        token: userStore.token
+                    }));
+                    console.log('session stored!')
+                }
+            })
+            .catch(error => {
+                console.log('error saving the session: ', error)
+            });
     };
 
     const handleCheckboxClick = (state) => {
@@ -87,7 +100,7 @@ const RegisterScreen = ({}) => {
             <View style={styles.row}>
                 <Text>Already have an account? </Text>
                 <Pressable onPress={() => {
-                    navigator.navigate('Login')
+                    navigator.navigate('Login');
                 }}>
                     <Text style={styles.link}>Login</Text>
                 </Pressable>
