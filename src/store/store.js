@@ -1,6 +1,7 @@
 import {action, makeObservable, observable} from "mobx";
 import axios from "axios";
 import './globalVariables';
+import {userStore} from "./userStore";
 
 
 class Store {
@@ -35,7 +36,7 @@ class Store {
     }
 
     async getShopsFromAPI() {
-        await axios.get(`${BASE_URL}/api/shops`, {
+        axios.get(`${BASE_URL}/api/shops`, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Accept': 'application/json'
@@ -70,7 +71,7 @@ class Store {
     async saveShop(shop) {
         const form = new FormData();
 
-        form.append("image_url",    {
+        form.append("image_url", {
             uri: shop.image.uri,
             type: 'image/jpeg',
             name: 'store_image.jpg',
@@ -82,13 +83,19 @@ class Store {
         return await axios.post(`${BASE_URL}/api/shops`, form, {
             headers: {
                 'Content-type': 'multipart/form-data',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                "Authorization" : `Bearer ${userStore.token}`,
             }
         });
     }
 
     async saveProductsForShop(products) {
-        await axios.post(`${BASE_URL}/api/products`, products)
+        await axios.post(`${BASE_URL}/api/products`, products, {
+            headers: {
+                "Authorization" : `Bearer ${userStore.token}`,
+                "Content-Type" : "application/json"
+            }
+        })
             .then((response) => {
                 if (response.status !== 201) {
                     console.log('saving a product failed with status code: ', response.status);

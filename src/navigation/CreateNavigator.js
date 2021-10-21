@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 const CreateNavigator = observer(() => {
     return (
         <Stack.Navigator>
-            {userStore.isAuthenticated ? (
+            {userStore.token ? (
                     <>
                         <Stack.Screen name={"Create Shop"} component={CreateShopScreen}/>
                         <Stack.Screen name={"New Products"} component={PreviewProductScreen}/>

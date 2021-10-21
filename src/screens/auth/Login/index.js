@@ -7,13 +7,14 @@ import {userStore} from "../../../store/userStore";
 import {useNavigation} from '@react-navigation/native';
 import ForgotPassword from "../../../components/auth/ForgotPasswordComponent";
 import RememberMeCheckbox from "../../../components/auth/RememberMe";
+import * as SecureStore from "expo-secure-store";
 
 const LoginScreen = ({}) => {
     const navigator = useNavigation();
     const {height} = useWindowDimensions();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('tester@gmail.com');
+    const [password, setPassword] = useState('1234567890');
     const [errorState, setErrorState] = useState(false);
     const [storeSession, setStoreSession] = useState(false);
 
@@ -23,7 +24,7 @@ const LoginScreen = ({}) => {
         }
     }, [errorState])
 
-    const onLogin = async () => {
+    const onLogin = () => {
         const validEmail = emailValidator(email)
         const validPassword = passwordValidator(password);
 
@@ -31,7 +32,19 @@ const LoginScreen = ({}) => {
             setErrorState(true);
             return;
         }
-        await userStore.login({email, password});
+        userStore.login({email, password})
+            .then(async () => {
+                if  (storeSession){
+                    await SecureStore.setItemAsync(SESSION_KEY, JSON.stringify({
+                        user: userStore.user,
+                        token: userStore.token
+                    }));
+                    console.log('session stored!')
+                }
+            })
+            .catch(error => {
+                console.log('error saving the session: ', error)
+            });
     };
 
     const handleCheckboxClick = (state) => {

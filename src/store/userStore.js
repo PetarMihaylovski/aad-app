@@ -1,25 +1,24 @@
 import {action, makeObservable, observable} from "mobx";
-import './globalVariables';
 import axios from "axios";
 
 class UserStore {
     user = {};
     token = null;
-    isAuthenticated = false;
 
     constructor() {
         makeObservable(this, {
             user: observable,
             token: observable,
-            isAuthenticated: observable,
+            restoreSession : action,
             login: action,
-            authenticated: action,
+            register : action,
             handleLogin : action
         });
     }
 
-    authenticated(isAuthenticated) {
-        this.isAuthenticated = isAuthenticated;
+    restoreSession({user, token}){
+        this.user = user;
+        this.token = token;
     }
 
     async login(credentials) {
@@ -73,7 +72,6 @@ class UserStore {
             id: response.data.user.id,
             updatedAt: response.data.user.updated_at
         };
-        userStore.authenticated(true);
     };
 }
 

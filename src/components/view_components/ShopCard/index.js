@@ -9,7 +9,7 @@ const ShopCard = ({shop}) => {
     return (
         <View style={styles.container}>
             <Image style={styles.image}
-                   source={{uri: store.BASE_URL + shop.imageURI}}/>
+                   source={{uri: BASE_URL + shop.imageURI}}/>
             <View style={styles.textContainer}>
                 <Text style={styles.shopName}>{shop.name}</Text>
                 <Pressable onPress={() => {
