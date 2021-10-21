@@ -10,6 +10,7 @@ class UserStore {
             user: observable,
             token: observable,
             restoreSession : action,
+            deleteSession : action,
             login: action,
             register : action,
             handleLogin : action
@@ -19,6 +20,11 @@ class UserStore {
     restoreSession({user, token}){
         this.user = user;
         this.token = token;
+    }
+
+    deleteSession() {
+        this.user = {};
+        this.token = null;
     }
 
     async login(credentials) {
