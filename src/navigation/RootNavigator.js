@@ -1,20 +1,13 @@
 import React from "react";
-import {View, Text} from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Entypo from "react-native-vector-icons/Entypo";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import CreateShopScreen from "../screens/create_screens/CreateShopScreen";
 import ShopNavigator from "./ShopNavigator";
 import CreateNavigator from "./CreateNavigator";
+import HomeScreen from "../screens/view_screens/HomeScreen";
 
 const Tab = createBottomTabNavigator();
-
-const HomeScreen = ({name}) => (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>{name}</Text>
-    </View>
-);
 
 const RootNavigator = () => {
     return (
