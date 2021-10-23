@@ -90,7 +90,7 @@ class Store {
     }
 
     async saveProductsForShop(products) {
-        await axios.post(`${BASE_URL}/api/products`, products, {
+        axios.post(`${BASE_URL}/api/products`, products, {
             headers: {
                 "Authorization" : `Bearer ${userStore.token}`,
                 "Content-Type" : "application/json"

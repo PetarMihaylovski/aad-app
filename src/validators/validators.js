@@ -18,3 +18,8 @@ export const productValidator = (fields) => {
     // check if user has entered data in all the fields
     return !(!fields.name || !fields.price || !fields.stock || !fields.category);
 };
+
+export const shopValidator = (fields) => {
+    // check if user has entered data in all the fields
+    return !(!fields.name || !fields.description || !fields.image);
+};
