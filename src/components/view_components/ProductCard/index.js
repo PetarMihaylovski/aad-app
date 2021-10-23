@@ -13,8 +13,8 @@ const ProductCard = ({product}) => {
                            source={{uri: BASE_URL + item.path}}
                     />
                 )}
-                sliderWidth={350}
-                itemWidth={350}
+                sliderWidth={170}
+                itemWidth={170}
                 loop
             />
             <View style={styles.textContainer}>

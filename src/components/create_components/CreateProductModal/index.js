@@ -66,6 +66,7 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
         setPrice('');
         setStock('');
         setCategory('');
+        setImages([]);
     };
 
     return (
