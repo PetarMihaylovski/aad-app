@@ -1,17 +1,19 @@
 import Modal from "react-native-modal";
-import {Button, Text, TextInput, View} from "react-native";
+import {Alert, Button, Text, TextInput, View} from "react-native";
 import styles from "./styles";
 import ShopProductHeader from "../ShopProductHeader";
 import {Picker} from "@react-native-picker/picker";
 import React, {useState} from "react";
 import {productValidator} from "../../../validators/validators";
+import * as ImagePicker from "expo-image-picker";
 
 const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
-    const [category, setCategory] = useState('')
+    const [category, setCategory] = useState('');
+    const [images, setImages] = useState([]);
 
     const handleSaveButtonClick = () => {
         const isValid = productValidator({name, price, stock, category});
@@ -21,12 +23,37 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
                 name,
                 price,
                 stock,
-                category
+                category,
+                images
             });
             toggle();
             clearForm();
         } else {
             console.warn("All fields should have data!")
+        }
+    };
+
+    const pickImage = async () => {
+        if (images.length === 3){
+            Alert.alert("Image Limit Reached",
+                "Cannot add more than 3 images!",
+                [
+                    {
+                        text: "OK",
+                        style: "cancel"
+                    },
+                ]);
+            return;
+        }
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [3, 2],
+            quality: 1,
+        });
+        if (!result.cancelled) {
+            setImages(prevState => [...prevState, result]);
         }
     };
 
@@ -48,7 +75,9 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
                 <View>
                     <ShopProductHeader isCreateShop={false}
                                        name={name}
-                                       handleNameInput={handleNameInput}/>
+                                       handleNameInput={handleNameInput}
+                                       image={images[0]}
+                                       handleImageInput={pickImage}/>
                     <View style={styles.modalWrapper}>
                         <View style={styles.inputsWrapper}>
                             <Text style={styles.text}>Price</Text>
