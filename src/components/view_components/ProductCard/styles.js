@@ -5,27 +5,34 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 20,
         margin:10,
-        backgroundColor:'#d0d0d0'
+        backgroundColor:'rgba(208,208,208,0.66)'
     },
     image: {
         aspectRatio: 1,
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20
+        borderRadius: 20,
     },
     textContainer: {
-        paddingTop:3
+        paddingTop:3,
+        justifyContent:'center'
     },
     name: {
         fontWeight: "bold",
         fontSize: 18,
         textAlign: 'center',
-        textDecorationLine:'underline'
+        textDecorationLine:'underline',
+        marginVertical: 5
+    },
+    row:{
+      flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop: 10,
+        alignItems: 'center'
     },
     price: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
-        alignSelf: 'flex-end',
-        marginRight:15
+        alignSelf: 'flex-start',
+        marginLeft: 15,
     }
 });
 
