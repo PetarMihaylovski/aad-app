@@ -75,6 +75,13 @@ const CreateShopScreen = () => {
                 // adds the db id of the saved shop to the products
                 setProducts(prevState => prevState.map(product => {
                     product.shop_id = savedShop.id;
+                    product.images = product.images.map(image => {
+                        return {
+                            uri: image.uri,
+                            type: 'image/jpeg',
+                            name: 'product_image.jpg',
+                        };
+                    });
                     return product;
                 }));
                 if (products.length > 0) {

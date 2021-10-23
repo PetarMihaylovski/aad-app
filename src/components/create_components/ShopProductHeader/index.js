@@ -45,7 +45,7 @@ const ShopProductHeader = ({
                             data={image}
                             renderItem={({item}) => (
                                 <Image style={styles.image}
-                                       source={{uri: item}}
+                                       source={{uri: item.uri}}
                                 />
                             )}
                             sliderWidth={350}

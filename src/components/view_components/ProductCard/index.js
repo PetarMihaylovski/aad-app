@@ -10,7 +10,7 @@ const ProductCard = ({product}) => {
                 data={product.images}
                 renderItem={({item}) => (
                     <Image style={styles.image}
-                           source={{uri: item}}
+                           source={{uri: BASE_URL + item.path}}
                     />
                 )}
                 sliderWidth={350}

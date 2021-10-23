@@ -84,27 +84,46 @@ class Store {
             headers: {
                 'Content-type': 'multipart/form-data',
                 'Accept': 'application/json',
-                "Authorization" : `Bearer ${userStore.token}`,
+                "Authorization": `Bearer ${userStore.token}`,
             }
         });
     }
 
     async saveProductsForShop(products) {
-        axios.post(`${BASE_URL}/api/products`, products, {
-            headers: {
-                "Authorization" : `Bearer ${userStore.token}`,
-                "Content-Type" : "application/json"
-            }
-        })
-            .then((response) => {
-                if (response.status !== 201) {
-                    console.log('saving a product failed with status code: ', response.status);
+        products.forEach(product => {
+            const form = new FormData();
+            form.append("name", product.name);
+            form.append("price", product.price);
+            form.append("stock", product.stock);
+            form.append("category", product.category);
+            product.images.forEach((image, index) => {
+                let indx = '';
+                if (index === 0) {
+                    indx = 'One';
+                } else if (index === 1) {
+                    indx = 'Two';
+                } else {
+                    indx = 'Three';
                 }
-                console.log('products saved!');
-            })
-            .catch((error) => {
-                console.log('product error: ', error);
+                form.append(`image${indx}`, image);
             });
+
+            axios.post(`${BASE_URL}/api/product`, form, {
+                headers: {
+                    'Content-type': 'multipart/form-data',
+                    "Authorization": `Bearer ${userStore.token}`,
+                }
+            })
+                .then((response) => {
+                    if (response.status !== 201) {
+                        console.log('saving a product failed with status code: ', response.status);
+                    }
+                    console.log('products saved!: ', response.data);
+                })
+                .catch((error) => {
+                    console.log('product error: ', error);
+                });
+        });
     }
 }
 
