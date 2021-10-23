@@ -1,11 +1,12 @@
 import React, {useLayoutEffect, useState} from "react";
-import {Text, View, Pressable} from "react-native";
+import {Text, View, Pressable, Alert} from "react-native";
 import {useNavigation} from "@react-navigation/native"
 import Entypo from "react-native-vector-icons/Entypo";
 import styles from "./styles";
 import ShopProductHeader from "../../../components/create_components/ShopProductHeader";
 import {store} from "../../../store/store";
 import * as ImagePicker from "expo-image-picker";
+import {shopValidator} from "../../../validators/validators";
 
 const CreateShopScreen = () => {
     const navigator = useNavigation();
@@ -30,6 +31,22 @@ const CreateShopScreen = () => {
     }, [name, description, image, products]);
 
     const onSave = async () => {
+        const isValid = shopValidator({name, image, description});
+
+        if  (!isValid){
+            Alert.alert(
+                "Field is empty",
+                "Shop should have all the fields!",
+                [
+                    {
+                        text: "OK",
+                        style: "cancel"
+                    },
+                ]
+            );
+            return;
+        }
+
         const shop = {
             user_id: 1, //TODO: has to be changed whenever login is implemented
             name,
