@@ -76,7 +76,7 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
                     <ShopProductHeader isCreateShop={false}
                                        name={name}
                                        handleNameInput={handleNameInput}
-                                       image={images[0]}
+                                       image={images}
                                        handleImageInput={pickImage}/>
                     <View style={styles.modalWrapper}>
                         <View style={styles.inputsWrapper}>

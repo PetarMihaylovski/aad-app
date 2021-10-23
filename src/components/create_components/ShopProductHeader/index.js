@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Text, View, Image, Pressable, TextInput} from "react-native";
 import styles from "./styles";
+import Carousel from "react-native-snap-carousel";
 
 /**
  * eventually this would be split up, but if it is not, i am sorry
@@ -34,9 +35,24 @@ const ShopProductHeader = ({
                 </Pressable>
             </View>
             <View style={styles.imageContainer}>
-                <Image style={styles.image}
-                       source={{uri: image ? image.uri : 'https://i.picsum.photos/id/327/500/500.jpg?hmac=9kV_jy-Q_BAHmgMqOTXXJyOc8tWn3V0VS2h9bB8aWk0'}}
-                />
+                {
+                    isCreateShop || !image
+                        ? <Image style={styles.image}
+                                 source={{uri: image ? image.uri : 'https://i.picsum.photos/id/327/500/500.jpg?hmac=9kV_jy-Q_BAHmgMqOTXXJyOc8tWn3V0VS2h9bB8aWk0'}}
+                        />
+                        : <Carousel
+                            style={styles.image}
+                            data={image}
+                            renderItem={({item}) => (
+                                <Image style={styles.image}
+                                       source={{uri: item}}
+                                />
+                            )}
+                            sliderWidth={350}
+                            itemWidth={350}
+                            loop
+                        />
+                }
             </View>
             <View style={styles.inputsContainer}>
                 <View style={styles.nameContainer}>
