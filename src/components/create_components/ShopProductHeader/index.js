@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Text, View, Image, Pressable, TextInput} from "react-native";
 import styles from "./styles";
-import Carousel from "react-native-snap-carousel";
+import Carousel, {Pagination} from "react-native-snap-carousel";
 
 /**
  * eventually this would be split up, but if it is not, i am sorry
@@ -24,6 +24,7 @@ const ShopProductHeader = ({
                                handleDescriptionInput,
                                handleImageInput
                            }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
 
     return (
         <View>
@@ -40,18 +41,29 @@ const ShopProductHeader = ({
                         ? <Image style={styles.image}
                                  source={{uri: image ? image.uri : 'https://i.picsum.photos/id/327/500/500.jpg?hmac=9kV_jy-Q_BAHmgMqOTXXJyOc8tWn3V0VS2h9bB8aWk0'}}
                         />
-                        : <Carousel
-                            style={styles.image}
-                            data={image}
-                            renderItem={({item}) => (
-                                <Image style={styles.image}
-                                       source={{uri: item.uri}}
-                                />
-                            )}
-                            sliderWidth={350}
-                            itemWidth={350}
-                            loop
-                        />
+                        :
+                        <View>
+                            <Carousel
+                                style={styles.image}
+                                data={image}
+                                renderItem={({item}) => (
+                                    <Image style={styles.image}
+                                           source={{uri: item.uri}}
+                                    />
+                                )}
+                                onSnapToItem={(index) => setActiveIndex(index)}
+                                sliderWidth={350}
+                                itemWidth={350}
+                                loop
+                            />
+                            <Pagination
+                                dotsLength={image.length}
+                                activeDotIndex={activeIndex}
+                                dotContainerStyle={{height: 1}}
+                                dotColor={'#f15454'}
+                                inactiveDotColor={'#000000'}
+                            />
+                        </View>
                 }
             </View>
             <View style={styles.inputsContainer}>
