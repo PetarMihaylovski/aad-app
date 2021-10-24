@@ -3,8 +3,9 @@ import {Text, View, Image, Pressable} from "react-native";
 import styles from "./styles";
 import Carousel from "react-native-snap-carousel";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import Entypo from "react-native-vector-icons/Entypo";
 
-const ProductPreviewCard = ({product}) => {
+const ProductPreviewCard = ({product, count=0 ,controlButtons}) => {
     return (
         <View style={styles.container}>
             <View>
@@ -28,11 +29,36 @@ const ProductPreviewCard = ({product}) => {
                 <Text style={styles.info}>Category: {product.category}</Text>
             </View>
 
-            <Pressable
-                onPress={() =>{
-                }}>
-                <AntDesign name={'edit'} size={20}/>
-            </Pressable>
+            {controlButtons
+                ? <View style={{paddingVertical: 15, justifyContent: 'space-between'}}>
+                    <Pressable
+                        onPress={() => {
+                        }}>
+                        <AntDesign name={'edit'} size={20}/>
+                    </Pressable>
+                    <Pressable
+                        style={{alignSelf: 'flex-end'}}
+                        onPress={() => {
+                        }}>
+                        <Entypo name={'trash'} size={20}/>
+                    </Pressable>
+                </View>
+                : <View style={{paddingVertical: 15, justifyContent: 'space-between'}}>
+                    <Pressable
+                        onPress={() => {
+                        }}
+                        style={styles.button}>
+                        <Text style={{fontSize: 16, color: '#474747'}}>+</Text>
+                    </Pressable>
+                    <Text style={{marginLeft:7,fontSize: 16}}>{count}</Text>
+                    <Pressable
+                        onPress={() => {
+                        }}
+                        style={styles.button}>
+                        <Text style={{fontSize: 16, color: '#474747'}}>-</Text>
+                    </Pressable>
+                </View>
+            }
         </View>
     );
 };

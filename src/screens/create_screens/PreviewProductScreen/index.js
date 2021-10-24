@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useLayoutEffect, useState} from "react";
 import {FlatList, Text, View, Pressable} from "react-native";
 import styles from "./styles";
 import ProductView from "../../../components/create_components/ProductPreviewCard";
@@ -47,7 +47,7 @@ const PreviewProductScreen = () => {
                 data={products}
                 extraData={products}
                 renderItem={({item}) => (
-                    <ProductView product={item}/>
+                    <ProductView product={item} controlButtons/>
                 )}
                 keyExtractor={(item => item.id + item.name)}>
             </FlatList>

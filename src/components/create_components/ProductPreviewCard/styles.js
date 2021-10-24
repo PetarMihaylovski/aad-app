@@ -27,7 +27,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         alignSelf: 'flex-start',
         marginLeft: 15,
-    }
+    },
+    button: {
+        borderWidth: 1,
+        width: 25,
+        height: 25,
+        borderRadius: 17,
+        borderColor: '#676767',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
 });
 
 export default styles;
