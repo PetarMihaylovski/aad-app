@@ -5,39 +5,29 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         width:'95%',
-        height: 75,
+        height: 110,
         marginVertical:5,
         borderBottomWidth:1,
         borderColor:'lightgray'
     },
     image:{
         width:50,
-        height:75,
+        height:100,
         aspectRatio: 3/2
     },
     textContainer:{
         flex:1,
     },
-    productName:{
+    name:{
         alignSelf:'center',
         fontWeight:'bold',
-        fontSize:16
+        fontSize:18
     },
-    wrapper: {
-        marginVertical: 7,
-    },
-    text: {
+    info: {
         fontSize: 16,
-        fontWeight: 'bold',
-        marginVertical: 7,
-    },
-    input: {
-        height: 40,
-        width: '100%',
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 10,
-    },
+        alignSelf: 'flex-start',
+        marginLeft: 15,
+    }
 });
 
 export default styles;

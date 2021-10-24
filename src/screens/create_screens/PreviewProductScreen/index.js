@@ -1,7 +1,7 @@
 import React, {useEffect, useLayoutEffect, useState} from "react";
 import {FlatList, Text, View, Pressable} from "react-native";
 import styles from "./styles";
-import ProductView from "../../../components/create_components/ProductViewComponent";
+import ProductView from "../../../components/create_components/ProductPreviewCard";
 import CreateProductModal from "../../../components/create_components/CreateProductModal";
 import Entypo from "react-native-vector-icons/Entypo";
 import {useNavigation, useRoute} from "@react-navigation/native";
