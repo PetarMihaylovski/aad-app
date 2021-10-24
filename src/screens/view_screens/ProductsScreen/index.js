@@ -35,6 +35,9 @@ const ProductsScreen = ({navigation, route}) => {
                 <Pressable
                     style={{marginRight: 20}}
                     onPress={() => {
+                        navigation.navigate('Checkout', {
+                            orderedProducts
+                        });
                     }}>
                     {
                         orderedProducts.length > 0 ?

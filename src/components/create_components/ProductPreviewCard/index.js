@@ -6,6 +6,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 
 const ProductPreviewCard = ({product, count=0 ,controlButtons}) => {
+
     return (
         <View style={styles.container}>
             <View>
@@ -14,7 +15,7 @@ const ProductPreviewCard = ({product, count=0 ,controlButtons}) => {
                     data={product.images}
                     renderItem={({item}) => (
                         <Image style={styles.image}
-                               source={{uri: item.uri}}
+                               source={{uri: controlButtons ? item.uri : BASE_URL + item.path}}
                         />
                     )}
                     sliderWidth={125}
