@@ -4,7 +4,7 @@ import styles from "./styles";
 import Carousel, {Pagination} from "react-native-snap-carousel";
 import Fontisto from "react-native-vector-icons/Fontisto";
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, handleAddToShoppingCart}) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
@@ -35,9 +35,7 @@ const ProductCard = ({product}) => {
                 <View style={styles.row}>
                     <Text style={styles.price}>{'\u20AC'} {product.price}</Text>
                     <Pressable style={{marginRight: 10, marginBottom: 5}}
-                               onPress={() => {
-                                   console.log('added to basket!')
-                               }}>
+                               onPress={()=>handleAddToShoppingCart(product)}>
                         <Fontisto name='shopping-basket-add' size={26}/>
                     </Pressable>
                 </View>

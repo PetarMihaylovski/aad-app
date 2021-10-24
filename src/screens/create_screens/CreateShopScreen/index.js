@@ -33,7 +33,7 @@ const CreateShopScreen = () => {
     const onSave = async () => {
         const isValid = shopValidator({name, image, description});
 
-        if  (!isValid){
+        if (!isValid) {
             Alert.alert(
                 "Field is empty",
                 "Shop should have all the fields!",
