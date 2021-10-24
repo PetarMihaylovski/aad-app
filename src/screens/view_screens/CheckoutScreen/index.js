@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from "@react-navigation/native";
 import styles from "./styles";
-import {FlatList, View} from "react-native";
+import {FlatList, Text, View} from "react-native";
 import ProductPreviewCard from "../../../components/create_components/ProductPreviewCard";
 
 const CheckoutScreen = () => {
-    const navigator = useNavigation();
     const route = useRoute();
     const orderedProducts = route.params.orderedProducts;
+    const shop = route.params.shop;
 
     //could not think of a better name,
     //stores the product and the number of times it is ordered (quantity)
@@ -28,12 +28,50 @@ const CheckoutScreen = () => {
         });
     }, []);
 
+    const increment = (product) => {
+        setProductQuantity(prevState => {
+            return prevState.map((entry) => {
+                if (product.id === entry.product.id) {
+                    return {
+                        quantity: Math.max(0, entry.quantity + 1), // prevents from going less than 0
+                        product: entry.product
+                    }
+                } else {
+                    return entry;
+                }
+            });
+        });
+    }
+
+    const decrement = (product) => {
+        setProductQuantity(prevState => {
+            return prevState.map((entry) => {
+                if (product.id === entry.product.id) {
+                    return {
+                        quantity: Math.max(0, entry.quantity - 1), // prevents from going less than 0
+                        product: entry.product
+                    }
+                } else {
+                    return entry;
+                }
+            });
+        });
+    }
+
     return (
         <View style={styles.container}>
+
+            <Text style={styles.header}>Your order from: {shop.name}</Text>
+
             <FlatList
                 data={productQuantity}
+                extraData={productQuantity}
                 renderItem={({item}) => (
-                    <ProductPreviewCard product={item.product} count={item.quantity}/>
+                    <ProductPreviewCard product={item.product}
+                                        count={item.quantity}
+                                        handleIncrement={increment}
+                                        handleDecrement={decrement}
+                    />
                 )}
                 keyExtractor={item => item.product.id.toString() + item.product.name}
             />

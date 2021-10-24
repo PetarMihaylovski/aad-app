@@ -36,6 +36,7 @@ const ProductsScreen = ({navigation, route}) => {
                     style={{marginRight: 20}}
                     onPress={() => {
                         navigation.navigate('Checkout', {
+                            shop,
                             orderedProducts
                         });
                     }}>
