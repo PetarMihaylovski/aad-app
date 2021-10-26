@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginVertical: 5
     },
+    errorState :{
+      borderBottomWidth: 1,
+      borderColor: 'red'
+    },
     button: {
         marginVertical: 10,
         backgroundColor: '#3b71f3',

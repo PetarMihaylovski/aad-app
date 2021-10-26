@@ -13,18 +13,26 @@ const LoginScreen = ({}) => {
     const navigator = useNavigation();
     const {height} = useWindowDimensions();
 
-    const [email, setEmail] = useState('tester@gmail.com');
-    const [password, setPassword] = useState('1234567890');
+    // initial state
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [errorState, setErrorState] = useState(false);
     const [storeSession, setStoreSession] = useState(false);
 
+    /**
+     * removes the error state after 5 seconds
+     */
     useEffect(() => {
         if (errorState) {
             setTimeout(() => setErrorState(false), 5000);
         }
-    }, [errorState])
+    }, [errorState]);
 
+    /**
+     * login handler
+     */
     const onLogin = () => {
+        // validates the fields
         const validEmail = emailValidator(email)
         const validPassword = passwordValidator(password);
 
@@ -32,22 +40,28 @@ const LoginScreen = ({}) => {
             setErrorState(true);
             return;
         }
+
+        // authenticate user and store the session
         userStore.login({email, password})
             .then(async () => {
-                if  (storeSession){
+                if (storeSession) {
+                    // stores the session if user wants so
                     await SecureStore.setItemAsync(SESSION_KEY, JSON.stringify({
                         user: userStore.user,
                         token: userStore.token
                     }));
-                    console.log('session stored!')
+                    console.log('session stored successfully!')
                 }
             })
             .catch(error => {
-                console.log('error saving the session: ', error)
+                console.log('could not persist the session: ', error);
             });
+
+        // does not navigate away from the screen because the navigator will
+        // notice that the user token has been updated and will navigate accordingly
     };
 
-    const handleCheckboxClick = (state) => {
+    const handleRememberMeClick = (state) => {
         setStoreSession(state);
     }
 
@@ -59,11 +73,11 @@ const LoginScreen = ({}) => {
                 resizeMode="contain"
                 source={image}/>
 
-            {errorState && <Text>Wrong data!</Text>}
+            {errorState && <Text style={{color:'red'}}>Unprocessable data entered!</Text>}
 
             <View style={styles.inputContainer}>
                 <Text style={styles.title}>Email</Text>
-                <TextInput style={styles.input}
+                <TextInput style={[errorState ? styles.errorState : null]}
                            value={email}
                            onChangeText={setEmail}
                 />
@@ -71,7 +85,7 @@ const LoginScreen = ({}) => {
 
             <View style={styles.inputContainer}>
                 <Text style={styles.title}>Password</Text>
-                <TextInput style={styles.input}
+                <TextInput style={[errorState ? styles.errorState : null]}
                            value={password}
                            onChangeText={setPassword}
                            secureTextEntry
@@ -79,7 +93,7 @@ const LoginScreen = ({}) => {
             </View>
 
             <View style={styles.row}>
-                <RememberMeCheckbox storeSession={storeSession} handler={handleCheckboxClick}/>
+                <RememberMeCheckbox storeSession={storeSession} handler={handleRememberMeClick}/>
                 <ForgotPassword/>
             </View>
 
