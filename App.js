@@ -9,21 +9,26 @@ import {userStore} from "./src/store/userStore";
 export default function App() {
     useEffect(() => {
         async function fetchInitialAPIData() {
-            await store.getShopsFromAPI();
+            store.getShopsFromAPI();
         }
 
+        /**
+         * checks for existing session and restore it if it exists
+         * @returns {Promise<void>}
+         */
         async function restoreSession() {
             await SecureStore.getItemAsync(SESSION_KEY)
                 .then(response => {
                     const {user, token} = JSON.parse(response);
                     userStore.restoreSession({user, token});
                     console.log('session restored');
-                })
-                .catch(error => {
-                    console.log('session not found', error);
                 });
         }
 
+        /**
+         * asks for permission to access the gallery
+         * used to upload pictures to models
+         */
         (async () => {
             if (Platform.OS !== 'web') {
                 const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
