@@ -4,11 +4,15 @@ import styles from "./styles";
 import Carousel, {Pagination} from "react-native-snap-carousel";
 
 /**
- * eventually this would be split up, but if it is not, i am sorry
- * @param isCreateShop
+ * Another abomination of a component. Should be split in two components as well
+ * Used in two place:
+ * The create shop screen (but the carousel is hidden)
+ * The create product screen (but the description field is hidden)
+ *
+ * @param isCreateShop if the component is on the create shop screen
  * @param name
- * @param description
- * @param image
+ * @param description seen only on the create shop screen
+ * @param image used in both places BUT passed with different data types | create shop screen - object | create product screen - array
  * @param handleNameInput
  * @param handleDescriptionInput
  * @param handleImageInput
@@ -24,6 +28,7 @@ const ShopProductHeader = ({
                                handleDescriptionInput,
                                handleImageInput
                            }) => {
+    // the current displayed image on the carousel
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
@@ -38,10 +43,13 @@ const ShopProductHeader = ({
             <View style={styles.imageContainer}>
                 {
                     isCreateShop || !image
-                        ? <Image style={styles.image}
+                        ?
+                        // displays a single image on the create shop screen
+                        <Image style={styles.image}
                                  source={{uri: image ? image.uri : 'https://i.picsum.photos/id/327/500/500.jpg?hmac=9kV_jy-Q_BAHmgMqOTXXJyOc8tWn3V0VS2h9bB8aWk0'}}
                         />
                         :
+                        // displays a scrollable carousel with multiple images on the create product modal
                         <View>
                             <Carousel
                                 style={styles.image}
@@ -75,6 +83,7 @@ const ShopProductHeader = ({
                     />
                 </View>
                 {isCreateShop &&
+                // displays the description field if on the create shop screen
                 <View style={styles.nameContainer}>
                     <Text style={styles.inputTitle}>Description</Text>
                     <TextInput style={styles.descriptionInput}
