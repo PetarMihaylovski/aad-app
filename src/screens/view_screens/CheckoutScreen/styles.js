@@ -5,11 +5,24 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
     header:{
-        marginVertical:15,
+        marginTop:15,
         alignSelf:'center',
         fontSize: 18,
         fontWeight: 'bold'
-    }
+    },
+    total:{
+        marginBottom: 15,
+        alignSelf:'center',
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    warningText: {
+        marginVertical: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'red',
+        fontSize: 16
+    },
 });
 
 export default styles;

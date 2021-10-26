@@ -12,6 +12,7 @@ const CheckoutScreen = () => {
     //could not think of a better name,
     //stores the product and the number of times it is ordered (quantity)
     const [productQuantity, setProductQuantity] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
         //returns the number of times an object is found in an array
@@ -21,20 +22,32 @@ const CheckoutScreen = () => {
         const uniqueProducts = new Set(orderedProducts);
         //loop through the products and count how many times they are ordered
         uniqueProducts.forEach(product => {
+            const quantity = countOccurrences(orderedProducts, product);
             setProductQuantity(prevState => [...prevState, {
                 product,
-                quantity: countOccurrences(orderedProducts, product)
+                quantity,
+                combinedPrice: product.price * quantity
             }]);
         });
     }, []);
+
+    useEffect(() => {
+        // calculates the total price
+        const total = productQuantity.reduce((previousValue, currentValue) => {
+            return (previousValue + currentValue.combinedPrice)
+        }, 0);
+        setTotalPrice(total);
+    }, [productQuantity]);
 
     const increment = (product) => {
         setProductQuantity(prevState => {
             return prevState.map((entry) => {
                 if (product.id === entry.product.id) {
+                    const quantity = Math.max(0, entry.quantity + 1); // prevents from going less than 0
                     return {
-                        quantity: Math.max(0, entry.quantity + 1), // prevents from going less than 0
-                        product: entry.product
+                        quantity,
+                        product: entry.product,
+                        combinedPrice: entry.product.price * quantity
                     }
                 } else {
                     return entry;
@@ -47,9 +60,11 @@ const CheckoutScreen = () => {
         setProductQuantity(prevState => {
             return prevState.map((entry) => {
                 if (product.id === entry.product.id) {
+                    const quantity = Math.max(0, entry.quantity - 1); // prevents from going less than 0
                     return {
-                        quantity: Math.max(0, entry.quantity - 1), // prevents from going less than 0
-                        product: entry.product
+                        quantity,
+                        product: entry.product,
+                        combinedPrice: entry.product.price * quantity
                     }
                 } else {
                     return entry;
@@ -62,19 +77,24 @@ const CheckoutScreen = () => {
         <View style={styles.container}>
 
             <Text style={styles.header}>Your order from: {shop.name}</Text>
+            <Text style={styles.total}>Total Order Price: {'\u20AC'} {totalPrice.toFixed(2)}</Text>
 
-            <FlatList
-                data={productQuantity}
-                extraData={productQuantity}
-                renderItem={({item}) => (
-                    <ProductPreviewCard product={item.product}
-                                        count={item.quantity}
-                                        handleIncrement={increment}
-                                        handleDecrement={decrement}
+            {
+                productQuantity.length > 0
+                    ? <FlatList
+                        data={productQuantity}
+                        extraData={productQuantity}
+                        renderItem={({item}) => (
+                            <ProductPreviewCard product={item.product}
+                                                count={item.quantity}
+                                                handleIncrement={increment}
+                                                handleDecrement={decrement}
+                            />
+                        )}
+                        keyExtractor={item => item.product.id.toString() + item.product.name}
                     />
-                )}
-                keyExtractor={item => item.product.id.toString() + item.product.name}
-            />
+                    : <Text style={styles.warningText}>Cart was empty!</Text>
+            }
         </View>
     );
 };
