@@ -10,7 +10,9 @@ export const passwordValidator = (password) => {
 }
 
 export const usernameValidator = (username) => {
-    const regExp = /^[a-zA-Z\-_]+$/;
+    //lower/upper case letters with underscores and digits
+    //yes '____12' is a valid name
+    const regExp = /^[a-zA-Z\-_\d]+$/;
     return !(!username || !regExp.test(username));
 }
 
