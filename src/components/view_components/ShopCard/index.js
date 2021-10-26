@@ -4,6 +4,10 @@ import {Text, View, Image, Pressable} from 'react-native';
 import styles from "./styles";
 import {store} from "../../../store/store";
 
+/**
+ * Stateless component used
+ * to display shop data
+ */
 const ShopCard = ({shop}) => {
     const navigation = useNavigation();
     return (

@@ -4,12 +4,19 @@ import styles from "./styles";
 import Carousel, {Pagination} from "react-native-snap-carousel";
 import Fontisto from "react-native-vector-icons/Fontisto";
 
+/**
+ * Basically stateless component (technically not)
+ * used to display product data
+ * @param product the product to display
+ * @param handleAddToShoppingCart handler used whenever the shopping cart icon is clicked
+ */
 const ProductCard = ({product, handleAddToShoppingCart}) => {
+    // the image currently displayed on the carousel
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
         <View style={styles.container}>
-           <Text style={styles.name} numberOfLines={2} ellipsizeMode='tail'>{product.name}</Text>
+            <Text style={styles.name} numberOfLines={2} ellipsizeMode='tail'>{product.name}</Text>
             <View>
                 <Carousel
                     data={product.images}
@@ -35,7 +42,7 @@ const ProductCard = ({product, handleAddToShoppingCart}) => {
                 <View style={styles.row}>
                     <Text style={styles.price}>{'\u20AC'} {product.price}</Text>
                     <Pressable style={{marginRight: 10, marginBottom: 5}}
-                               onPress={()=>handleAddToShoppingCart(product)}>
+                               onPress={() => handleAddToShoppingCart(product)}>
                         <Fontisto name='shopping-basket-add' size={26}/>
                     </Pressable>
                 </View>
