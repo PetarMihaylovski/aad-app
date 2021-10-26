@@ -6,9 +6,17 @@ import styles from "./styles";
 import {Observer} from "mobx-react";
 import {store} from "../../../store/store";
 
+/**
+ * Displays the listview with the existing shops
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ShopsScreen = ({}) => {
     const navigation = useNavigation();
 
+    /**
+     * changes the screen title
+     */
     useEffect(() => {
         navigation.setOptions({
             title: `Shops Available: ${store.shops.length}`
