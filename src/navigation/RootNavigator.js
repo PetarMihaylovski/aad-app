@@ -16,12 +16,12 @@ const RootNavigator = () => {
 
                 <Tab.Screen
                     name={"Home Screen"}
+                    component={HomeScreen}
                     options={{
                         tabBarIcon: ({color}) => (
                             <FontAwesome5 name="home" size={25} color={color}/>
                         )
                     }}>
-                    {() => <HomeScreen name={"Home Screen"}/>}
                 </Tab.Screen>
 
                 <Tab.Screen

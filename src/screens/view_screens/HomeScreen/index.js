@@ -8,10 +8,12 @@ import * as SecureStore from "expo-secure-store";
 import {Observer} from "mobx-react";
 
 
-const HomeScreen = ({name}) => {
+const HomeScreen = ({}) => {
     const navigator = useNavigation();
 
     useLayoutEffect(() => {
+        // adds the logout button in the header
+        // whenever there is an existing session
         navigator.setOptions({
             headerRight: () => (
                 userStore.token &&
@@ -25,21 +27,26 @@ const HomeScreen = ({name}) => {
                 )}</Observer>
             ),
         });
+        // called every time the variable in the dependencies changes
     }, [userStore.token]);
 
+    /**
+     * handles logout action by deleting the existing session,
+     * thus logging out the current user.
+     *
+     * No error handling, since button is only visible when
+     * there is an existing session
+     */
     const onLogout = async () => {
         SecureStore.deleteItemAsync(SESSION_KEY)
             .then(() => {
                 userStore.deleteSession();
-            })
-            .catch(error => {
-                console.log("error deleting the session: ", error);
             });
     };
 
     return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>{name}</Text>
+            <Text>Home Screen</Text>
         </View>
     );
 };

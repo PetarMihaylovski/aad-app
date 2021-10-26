@@ -22,7 +22,8 @@ export default function App() {
                     const {user, token} = JSON.parse(response);
                     userStore.restoreSession({user, token});
                     console.log('session restored');
-                });
+                })
+                .catch(() => console.log('ongoing session not found'));
         }
 
         /**
