@@ -9,12 +9,17 @@ import {useNavigation, useRoute} from "@react-navigation/native";
 const PreviewProductScreen = () => {
     const navigator = useNavigation();
     const route = useRoute();
+
     const saveProduct = route.params.saveProduct;
     const existingProducts = route.params.products;
 
+    //stores the products
     const [products, setProducts] = useState(existingProducts);
     const [isModalVisible, setModalVisibility] = useState(false);
 
+    /**
+     * renders the save icon in the header
+     */
     useLayoutEffect(() => {
         navigator.setOptions({
             headerLeft: () => null,
