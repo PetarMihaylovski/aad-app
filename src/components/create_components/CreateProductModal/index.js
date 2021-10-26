@@ -7,8 +7,16 @@ import React, {useState} from "react";
 import {productValidator} from "../../../validators/validators";
 import * as ImagePicker from "expo-image-picker";
 
+/**
+ * This component is used to create new products
+ * @param isVisible
+ * @param toggle show/hide the modal
+ * @param handleNewProduct
+ * @returns {JSX.Element}
+ */
 const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
 
+    // initial state
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
@@ -16,9 +24,11 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
     const [images, setImages] = useState([]);
 
     const handleSaveButtonClick = () => {
+        // validates the fields
         const isValid = productValidator({name, price, stock, category});
         if (isValid) {
             handleNewProduct({
+                //random ID assigned, so the item can be identified uniquely by the flat list
                 id: Math.round(Math.random() * 10000),
                 name,
                 price,
@@ -26,13 +36,19 @@ const CreateProductModal = ({isVisible, toggle, handleNewProduct}) => {
                 category,
                 images
             });
+            // closes the modal
             toggle();
+            // resets the state
             clearForm();
         } else {
             console.warn("All fields should have data!")
         }
     };
 
+    /**
+     * handles the upload button action
+     * opens the gallery and allows the user to pick up to 3 images
+     */
     const pickImage = async () => {
         if (images.length === 3){
             Alert.alert("Image Limit Reached",
