@@ -9,6 +9,12 @@ import HomeScreen from "../screens/view_screens/HomeScreen";
 
 const Tab = createBottomTabNavigator();
 
+/**
+ * The root navigator
+ * On every tab.screen there is a nested navigator
+ * for the respective routes
+ * @returns {JSX.Element}
+ */
 const RootNavigator = () => {
     return (
         <NavigationContainer>
