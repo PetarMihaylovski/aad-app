@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from "@react-navigation/native";
 import styles from "./styles";
-import {FlatList, Text, View} from "react-native";
+import {Button, FlatList, Text, View} from "react-native";
 import ProductPreviewCard from "../../../components/create_components/ProductPreviewCard";
+import {store} from "../../../store/store";
 
 const CheckoutScreen = () => {
     const route = useRoute();
@@ -73,6 +74,22 @@ const CheckoutScreen = () => {
         });
     }
 
+    const placeOrder = () => {
+        const orderData = productQuantity.map(entry => {
+            return {
+                product_id: entry.product.id,
+                stock: entry.quantity
+            }
+        });
+        store.placeOrder(orderData)
+            .then((response) => {
+                console.log('order placed successfully: ', response.data);
+            })
+            .catch(error => {
+                console.log('error occurred placing the order: ', error);
+            });
+    };
+
     return (
         <View style={styles.container}>
 
@@ -81,18 +98,22 @@ const CheckoutScreen = () => {
 
             {
                 productQuantity.length > 0
-                    ? <FlatList
-                        data={productQuantity}
-                        extraData={productQuantity}
-                        renderItem={({item}) => (
-                            <ProductPreviewCard product={item.product}
-                                                count={item.quantity}
-                                                handleIncrement={increment}
-                                                handleDecrement={decrement}
-                            />
-                        )}
-                        keyExtractor={item => item.product.id.toString() + item.product.name}
-                    />
+                    ?
+                    <>
+                        <FlatList
+                            data={productQuantity}
+                            extraData={productQuantity}
+                            renderItem={({item}) => (
+                                <ProductPreviewCard product={item.product}
+                                                    count={item.quantity}
+                                                    handleIncrement={increment}
+                                                    handleDecrement={decrement}
+                                />
+                            )}
+                            keyExtractor={item => item.product.id.toString() + item.product.name}
+                        />
+                        <Button title="Place Order" onPress={placeOrder}/>
+                    </>
                     : <Text style={styles.warningText}>Cart was empty!</Text>
             }
         </View>

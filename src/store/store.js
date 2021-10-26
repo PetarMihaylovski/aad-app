@@ -125,6 +125,16 @@ class Store {
                 });
         });
     }
+
+    async placeOrder(order){
+        return axios.post(`${BASE_URL}/api/orders`, order, {
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json',
+                "Authorization": `Bearer ${userStore.token}`,
+            }
+        });
+    }
 }
 
 export const store = new Store();
