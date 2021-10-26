@@ -5,6 +5,7 @@ import ProductCard from "../../../components/view_components/ProductCard";
 import {store} from "../../../store/store";
 import Entypo from "react-native-vector-icons/Entypo";
 import {Badge} from "react-native-elements";
+import {userStore} from "../../../store/userStore";
 
 const ProductsScreen = ({navigation, route}) => {
     const shop = route.params.shop;
@@ -35,10 +36,19 @@ const ProductsScreen = ({navigation, route}) => {
                 <Pressable
                     style={{marginRight: 20}}
                     onPress={() => {
-                        navigation.navigate('Checkout', {
-                            shop,
-                            orderedProducts
-                        });
+
+                        if (userStore.token){
+                            navigation.navigate('Checkout', {
+                                shop,
+                                orderedProducts
+                            });
+                        }
+                        else{
+                            navigation.navigate('Login', {
+                                shop,
+                                orderedProducts
+                            });
+                        }
                     }}>
                     {
                         orderedProducts.length > 0 ?
@@ -50,7 +60,7 @@ const ProductsScreen = ({navigation, route}) => {
                 </Pressable>
             ),
         });
-    }, [orderedProducts]);
+    }, [orderedProducts, userStore.token]);
 
     const addToShoppingCart = (item) => {
         setOrderedProducts(prevState => [...prevState, item]);

@@ -6,6 +6,7 @@ import ProductPreviewCard from "../../../components/create_components/ProductPre
 import {store} from "../../../store/store";
 
 const CheckoutScreen = () => {
+    const navigator = useNavigation();
     const route = useRoute();
     const orderedProducts = route.params.orderedProducts;
     const shop = route.params.shop;
@@ -84,6 +85,11 @@ const CheckoutScreen = () => {
         store.placeOrder(orderData)
             .then((response) => {
                 console.log('order placed successfully: ', response.data);
+                navigator.reset({
+                    index: 0, routes: [{
+                        name: 'Home Screen'
+                    }]
+                });
             })
             .catch(error => {
                 console.log('error occurred placing the order: ', error);

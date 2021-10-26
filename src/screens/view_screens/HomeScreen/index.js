@@ -25,7 +25,7 @@ const HomeScreen = ({name}) => {
                 )}</Observer>
             ),
         });
-    }, []);
+    }, [userStore.token]);
 
     const onLogout = async () => {
         SecureStore.deleteItemAsync(SESSION_KEY)
