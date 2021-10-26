@@ -8,6 +8,10 @@ import {useNavigation} from '@react-navigation/native';
 import RememberMeCheckbox from "../../../components/auth/RememberMe";
 import * as SecureStore from "expo-secure-store";
 
+/**
+ * Logic is the same as in the login screen
+ * If you have any questions, refer to the login screen in-code docs
+ */
 const RegisterScreen = ({}) => {
     const navigator = useNavigation();
     const {height} = useWindowDimensions();
@@ -33,6 +37,7 @@ const RegisterScreen = ({}) => {
             setErrorState(true);
             return;
         }
+
         userStore.register({username, email, password})
             .then(async () => {
                 if (storeSession) {
@@ -40,15 +45,15 @@ const RegisterScreen = ({}) => {
                         user: userStore.user,
                         token: userStore.token
                     }));
-                    console.log('session stored!')
+                    console.log('session stored successfully!')
                 }
             })
             .catch(error => {
-                console.log('error saving the session: ', error)
+                console.log('could not persist the session: ', error);
             });
     };
 
-    const handleCheckboxClick = (state) => {
+    const handleRememberMeClick = (state) => {
         setStoreSession(state);
     }
 
@@ -60,12 +65,11 @@ const RegisterScreen = ({}) => {
                 resizeMode="contain"
                 source={image}/>
 
-            {errorState && <Text>Wrong data!</Text>}
-
+            {errorState && <Text style={{color: 'red'}}>Unprocessable data entered!</Text>}
 
             <View style={styles.inputContainer}>
                 <Text style={styles.title}>Username</Text>
-                <TextInput style={styles.input}
+                <TextInput style={[errorState ? styles.errorState : null]}
                            value={username}
                            onChangeText={setUsername}
                 />
@@ -73,7 +77,7 @@ const RegisterScreen = ({}) => {
 
             <View style={styles.inputContainer}>
                 <Text style={styles.title}>Email</Text>
-                <TextInput style={styles.input}
+                <TextInput style={[errorState ? styles.errorState : null]}
                            value={email}
                            onChangeText={setEmail}
                 />
@@ -81,7 +85,7 @@ const RegisterScreen = ({}) => {
 
             <View style={styles.inputContainer}>
                 <Text style={styles.title}>Password</Text>
-                <TextInput style={styles.input}
+                <TextInput style={[errorState ? styles.errorState : null]}
                            value={password}
                            onChangeText={setPassword}
                            secureTextEntry
@@ -89,7 +93,7 @@ const RegisterScreen = ({}) => {
             </View>
 
             <View style={styles.row}>
-                <RememberMeCheckbox storeSession={storeSession} handler={handleCheckboxClick}/>
+                <RememberMeCheckbox storeSession={storeSession} handler={handleRememberMeClick}/>
             </View>
 
             <Pressable style={styles.button}
