@@ -12,6 +12,13 @@ const styles = StyleSheet.create({
         margin: 10,
         width: '95%',
         height: '90%'
+    },
+    errorState: {
+        marginVertical: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'red',
+        fontSize: 16
     }
 });
 
