@@ -7,15 +7,28 @@ import ShopProductHeader from "../../../components/create_components/ShopProduct
 import {store} from "../../../store/store";
 import * as ImagePicker from "expo-image-picker";
 import {shopValidator} from "../../../validators/validators";
+import {userStore} from "../../../store/userStore";
 
+/**
+ * user has to be authenticated to access this screen
+ */
 const CreateShopScreen = () => {
     const navigator = useNavigation();
 
+    // initial shop state
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [products, setProducts] = useState([]);
     const [image, setImage] = useState(null);
 
+    // products for the shop
+    // see 'lifting state up' in react docs
+    const [products, setProducts] = useState([]);
+
+    const [errorState, setErrorState] = useState(false);
+
+    /**
+     * renders the save button in the header
+     */
     useLayoutEffect(() => {
         navigator.setOptions({
             headerRight: () => (
@@ -26,11 +39,13 @@ const CreateShopScreen = () => {
                 </Pressable>
             ),
         });
-        // not the most optimal solution since it causes the button to reload every time
-        // a name or description character is called, but I spent 7 hours to figure it out :D
     }, [name, description, image, products]);
 
+    /**
+     * handles the save button action
+     */
     const onSave = async () => {
+        // validates the shop data
         const isValid = shopValidator({name, image, description});
 
         if (!isValid) {
@@ -47,8 +62,9 @@ const CreateShopScreen = () => {
             return;
         }
 
+        // constructs the shop object
         const shop = {
-            user_id: 1, //TODO: has to be changed whenever login is implemented
+            user_id: userStore.user.id,
             name,
             image,
             description,
@@ -58,21 +74,24 @@ const CreateShopScreen = () => {
          *  allow me to explain what happens here:
          *  1) the shop is sent to the API
          *  2) the API's response (which is the newly created shop) is cached so no need of a new fetch afterwards
-         *  3) the image is patched to the new shop
-         *  4) then the new shop is passed to the next callback, so its id could be used in the
+         *  3) then the new shop is passed to the next callback, so its id could be used in the
          *  product's body and the products could be successfully saved for this shop
          */
-
         await store.saveShop(shop)
             .then((response) => {
                 if (response.status !== 201) {
                     console.log('saving a shop failed with status code: ', response.status);
                 }
+                // cache the new shop, so it does not need to be fetched from the API
+                // works only on the shop's creator phone
                 store.addShop(response.data);
                 return response.data;
             })
             .then(async (savedShop) => {
-                // adds the db id of the saved shop to the products
+                // remaps the products array to add the shop id of the shop
+                // that has been saved in the database already
+                // furthermore, it maps the images array accordingly,
+                // so they can be sent in the form data
                 setProducts(prevState => prevState.map(product => {
                     product.shop_id = savedShop.id;
                     product.images = product.images.map(image => {
@@ -85,12 +104,37 @@ const CreateShopScreen = () => {
                     return product;
                 }));
                 if (products.length > 0) {
-                    await store.saveProductsForShop(products);
+                    return store.saveProductsForShop(products)
                 }
             })
+            .then((savedProducts) => {
+                if (savedProducts.status !== 201) {
+                    console.log('saving a product failed with status code: ', savedProducts.status);
+                }
+                console.log('products saved!: ', savedProducts.data);
+            })
             .catch((error) => {
-                console.log('shop error: ', error);
+                setErrorState(true);
+                console.log('saving the shop with its products failed: ', error);
             });
+
+        if (errorState) {
+            Alert.alert("Error occurred",
+                "Something went wrong! Please try again later.",
+                [
+                    {
+                        text: "Exit",
+                        onPress: () => {
+                            navigator.reset({
+                                index: 0, routes: [{
+                                    name: 'Home Screen'
+                                }]
+                            });
+                        },
+                        style: "cancel"
+                    },
+                ]);
+        }
 
         navigator.reset({
             index: 0, routes: [{
@@ -98,6 +142,12 @@ const CreateShopScreen = () => {
             }]
         });
     }
+
+    /**
+     * upload button handler
+     * when called, opens the gallery
+     * and saves the chosen image
+     */
     const pickImage = async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -109,16 +159,23 @@ const CreateShopScreen = () => {
             setImage(result);
         }
     };
-    const handleNameInput = (input) => {
-        setName(input);
-    };
-    const handleDescriptionInput = (input) => {
-        setDescription(input);
-    };
+
+    /**
+     * adds a new product
+     * @param p
+     */
     const saveProduct = (p) => {
         setProducts(prevState => {
             return [...prevState, p];
         });
+    };
+
+    const handleNameInput = (input) => {
+        setName(input);
+    };
+
+    const handleDescriptionInput = (input) => {
+        setDescription(input);
     };
 
     return (
@@ -134,7 +191,7 @@ const CreateShopScreen = () => {
                 <View style={styles.rowContainer}>
                     <Text style={styles.importText}>Import Products From CSV</Text>
                     <Pressable style={styles.button}
-                               onPress={() => console.warn("COULD be implemented")}>
+                               onPress={() => console.warn("would not be implemented")}>
                         <Text style={styles.buttonText}>IMPORT</Text>
                     </Pressable>
                 </View>
