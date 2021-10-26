@@ -5,8 +5,23 @@ import Carousel from "react-native-snap-carousel";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 
+/**
+ * To be honest this is an abomination of a component. I hate it
+ * It is used in two places:
+ * preview the newly created products in the create sequence
+ * preview the order cart in the checkout screen
+ *
+ * If there was more time, this component would have been split to two different components
+ *
+ * @param product the product to display; the only shared fields
+ * @param count quantity of the order; only in the checkout screen
+ * @param controlButtons display the edit and delete icons; only in the create shop sequence
+ * @param handleIncrement handler whenever product quantity is incremented; only in the checkout screen
+ * @param handleDecrement handler whenever product quantity is decremented; only in the checkout screen
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ProductPreviewCard = ({product, count = 0, controlButtons, handleIncrement, handleDecrement}) => {
-
     return (
         <View style={styles.container}>
             <View>
@@ -33,7 +48,9 @@ const ProductPreviewCard = ({product, count = 0, controlButtons, handleIncrement
             </View>
 
             {controlButtons
-                ? <View style={{paddingVertical: 15, justifyContent: 'space-between'}}>
+                ?
+                // the edit and thrash icon displayed on the create sequence
+                <View style={{paddingVertical: 15, justifyContent: 'space-between'}}>
                     <Pressable
                         onPress={() => {
                         }}>
@@ -46,7 +63,9 @@ const ProductPreviewCard = ({product, count = 0, controlButtons, handleIncrement
                         <Entypo name={'trash'} size={20}/>
                     </Pressable>
                 </View>
-                : <View style={{paddingVertical: 15, justifyContent: 'space-between'}}>
+                :
+                // the increment/decrement buttons in the checkout screen
+                <View style={{paddingVertical: 15, justifyContent: 'space-between'}}>
                     <Pressable
                         onPress={() => {
                             handleIncrement(product);
