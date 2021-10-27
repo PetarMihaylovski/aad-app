@@ -46,7 +46,7 @@ const ShopProductHeader = ({
                         ?
                         // displays a single image on the create shop screen
                         <Image style={styles.image}
-                                 source={{uri: image ? image.uri : 'https://i.picsum.photos/id/327/500/500.jpg?hmac=9kV_jy-Q_BAHmgMqOTXXJyOc8tWn3V0VS2h9bB8aWk0'}}
+                                 source={{uri: image ? image.uri : 'https://via.placeholder.com/500'}}
                         />
                         :
                         // displays a scrollable carousel with multiple images on the create product modal
