@@ -10,6 +10,7 @@ export default function App() {
     useEffect(() => {
         async function fetchInitialAPIData() {
             store.getShopsFromAPI();
+            console.log('data fetched!');
         }
 
         /**
@@ -41,6 +42,13 @@ export default function App() {
 
         restoreSession();
         fetchInitialAPIData();
+        // (1000*60) = 1 minute * X = X minutes
+        const interval = setInterval(async () => {
+            await fetchInitialAPIData();
+        }, (1000 * 60)*3);
+        return () => {
+            clearInterval(interval);
+        };
     }, []);
 
     return (
