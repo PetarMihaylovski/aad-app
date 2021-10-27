@@ -1,7 +1,6 @@
 import React from "react";
 import {render, fireEvent} from '@testing-library/react-native';
 import ProductPreviewCard from "../../src/components/create_components/ProductPreviewCard";
-import ProductView from "../../src/components/create_components/ProductPreviewCard";
 
 const product = {
     "id": 3,
@@ -36,7 +35,7 @@ it('product preview component has increment/decrement buttons', () => {
 
 it('product preview component has edit/delete buttons', () => {
     const {getByTestId} = render(
-        <ProductView product={product} controlButtons/>
+        <ProductPreviewCard product={product} controlButtons/>
     );
     fireEvent.press(getByTestId("PPC.edit"));
     fireEvent.press(getByTestId("PPC.delete"));
@@ -45,7 +44,7 @@ it('product preview component has edit/delete buttons', () => {
 it('product preview component has edit/delete buttons and increment button is not rendered', () => {
     const increment = jest.fn();
     const {getByTestId, queryByTestId} = render(
-        <ProductView product={product} controlButtons handleIncrement={increment}/>
+        <ProductPreviewCard product={product} controlButtons handleIncrement={increment}/>
     );
     fireEvent.press(getByTestId("PPC.edit"));
     fireEvent.press(getByTestId("PPC.delete"));
