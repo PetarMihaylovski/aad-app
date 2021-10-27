@@ -63,6 +63,7 @@ class UserStore {
                 this.handleLogin(response);
             })
             .catch((error) => {
+                // not sure how to handle this, apart from logging it
                 console.log("error while logging in: ", error);
             });
     }
@@ -90,6 +91,7 @@ class UserStore {
             this.handleLogin(response);
         })
             .catch((error) => {
+                // not sure how to handle this, apart from logging it
                 console.log("error while registering: ", error);
             });
     }

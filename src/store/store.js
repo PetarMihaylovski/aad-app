@@ -62,8 +62,7 @@ class Store {
                 store.initShops(shops);
             })
             .catch((error) => {
-                //TODO: handle the error appropriately
-                console.log(error);
+                console.log('error occurred fetching the shops: ', error);
             });
     }
 
