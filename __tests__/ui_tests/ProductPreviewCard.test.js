@@ -6,7 +6,9 @@ const product = {
     "id": 3,
     "name": "Nice T-Shirt",
     "price": "17,59",
-    "imageURI": "https://i.picsum.photos/id/774/100/100.jpg?hmac=ecKifXlZM3csAuXkIO2A1NYGhUlnE3q_ZUz3Vf74BK4"
+    "images": [{
+        path: "https://i.picsum.photos/id/774/100/100.jpg?hmac=ecKifXlZM3csAuXkIO2A1NYGhUlnE3q_ZUz3Vf74BK4",
+    },]
 };
 
 it('renders the product correctly', () => {

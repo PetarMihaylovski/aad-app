@@ -8,7 +8,18 @@ jest.mock("@react-navigation/native", () => {
         useNavigation: () => ({
             navigate: jest.fn(),
             dispatch: mockedDispatch,
+
         }),
+        useRoute: () => ({
+            params: {
+                // productOne: '<paramValue>',
+                // productTwo: '<paramValue2>',
+            }
+        }),
+        setOptions: () => jest.fn(),
+        push: () => jest.fn()
     };
 });
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+
+global.BASE_URL = ''
