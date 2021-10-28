@@ -25,7 +25,8 @@ it('logs-in successfully', async () => {
     expect(fetch.mock.calls).toMatchSnapshot();
 });
 
-it('shows error state',  () => {
+it('shows error state', () => {
+    jest.useFakeTimers();
     const {getByTestId, queryAllByText} = render(
         <LoginScreen/>
     );
