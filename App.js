@@ -5,9 +5,12 @@ import {store} from "./src/store/store";
 import * as ImagePicker from "expo-image-picker";
 import * as SecureStore from "expo-secure-store";
 import {userStore} from "./src/store/userStore";
+import { LogBox } from "react-native";
 
 export default function App() {
     useEffect(() => {
+        LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
+
         async function fetchInitialAPIData() {
             store.getShopsFromAPI();
             console.log('data fetched!');
@@ -42,7 +45,7 @@ export default function App() {
 
         restoreSession();
         fetchInitialAPIData();
-        // (1000*60) = 1 minute * X = X minutes
+        // (1000*60) = 1 minute * X = X minutes // big shaq's quick mafths
         const interval = setInterval(async () => {
             await fetchInitialAPIData();
         }, (1000 * 60)*3);
