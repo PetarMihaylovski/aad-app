@@ -27,6 +27,17 @@ const CreateShopScreen = () => {
     const [errorState, setErrorState] = useState(false);
 
     /**
+     * warns the user that they already have a shop, in case they do
+     */
+    useLayoutEffect(() => {
+        if (userStore.ownsShop) {
+            Alert.alert("Shop owned",
+                "You already own a shop! Cannot have more than one shop!",
+            );
+        }
+    }, []);
+
+    /**
      * renders the save button in the header
      */
     useLayoutEffect(() => {
@@ -45,6 +56,25 @@ const CreateShopScreen = () => {
      * handles the save button action
      */
     const onSave = async () => {
+        if (userStore.ownsShop) {
+            Alert.alert("Shop owned",
+                "Shop could not be saved! You already own a shop!",
+                [
+                    {
+                        text: "Okay",
+                        onPress: () => {
+                            navigator.reset({
+                                index: 0, routes: [{
+                                    name: 'Home Screen'
+                                }]
+                            });
+                        },
+                        style: "okay"
+                    },
+                ]);
+            return;
+        }
+
         // validates the shop data
         const isValid = shopValidator({name, image, description});
 
