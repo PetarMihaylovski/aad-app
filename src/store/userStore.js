@@ -8,11 +8,13 @@ import axios from "axios";
 class UserStore {
     user = {};
     token = null;
+    ownsShop = false;
 
     constructor() {
         makeObservable(this, {
             user: observable,
             token: observable,
+            ownsShop : observable,
             restoreSession: action,
             deleteSession: action,
             login: action,
@@ -25,10 +27,12 @@ class UserStore {
      * Adds the session params held in the secure storage
      * @param user
      * @param token
+     * @param ownsShop
      */
-    restoreSession({user, token}) {
+    restoreSession({user, token, ownsShop}) {
         this.user = user;
         this.token = token;
+        this.ownsShop = ownsShop;
     }
 
     /**
@@ -107,6 +111,7 @@ class UserStore {
             id: response.data.user.id,
             updatedAt: response.data.user.updated_at
         };
+        userStore.ownsShop=Boolean(response.data.user.has_shop);
     };
 }
 
