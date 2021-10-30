@@ -73,13 +73,14 @@ const LoginScreen = ({}) => {
                 resizeMode="contain"
                 source={image}/>
 
-            {errorState && <Text style={{color:'red'}}>Unprocessable data entered!</Text>}
+            {errorState && <Text style={{color: 'red'}}>Unprocessable data entered!</Text>}
 
             <View style={styles.inputContainer}>
                 <Text style={styles.title}>Email</Text>
                 <TextInput style={[errorState ? styles.errorState : null]}
                            value={email}
                            onChangeText={setEmail}
+                           testID={'Login.emailInput'}
                 />
             </View>
 
@@ -89,6 +90,7 @@ const LoginScreen = ({}) => {
                            value={password}
                            onChangeText={setPassword}
                            secureTextEntry
+                           testID={'Login.passwordInput'}
                 />
             </View>
 
@@ -98,13 +100,14 @@ const LoginScreen = ({}) => {
             </View>
 
             <Pressable style={styles.button}
-                       onPress={onLogin}>
+                       onPress={onLogin}
+                       testID={'Login.login'}>
                 <Text style={{color: 'white', fontWeight: 'bold'}}>LOGIN</Text>
             </Pressable>
 
             <View style={styles.row}>
                 <Text>Don’t have an account? </Text>
-                <Pressable onPress={() => navigator.navigate('Register')}>
+                <Pressable onPress={() => navigator.navigate('Register')} testID={'Login.register'}>
                     <Text style={styles.link}>Register</Text>
                 </Pressable>
             </View>

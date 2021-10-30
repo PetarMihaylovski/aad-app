@@ -17,10 +17,7 @@ const ShopCard = ({shop}) => {
             <View style={styles.textContainer}>
                 <Text style={styles.shopName}>{shop.name}</Text>
                 <Pressable onPress={() => {
-                    navigation.navigate('Shops', {
-                        screen: 'Products',
-                        params: {shop: shop},
-                    });
+                    navigation.navigate('Products', {shop});
                 }}>
                     <Text style={styles.seeMoreText}>See Products</Text>
                 </Pressable>

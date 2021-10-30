@@ -42,7 +42,8 @@ const ProductCard = ({product, handleAddToShoppingCart}) => {
                 <View style={styles.row}>
                     <Text style={styles.price}>{'\u20AC'} {product.price}</Text>
                     <Pressable style={{marginRight: 10, marginBottom: 5}}
-                               onPress={() => handleAddToShoppingCart(product)}>
+                               onPress={() => handleAddToShoppingCart(product)}
+                               testID={'PC.button'}>
                         <Fontisto name='shopping-basket-add' size={26}/>
                     </Pressable>
                 </View>

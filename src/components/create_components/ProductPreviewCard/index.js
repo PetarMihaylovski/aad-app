@@ -53,13 +53,15 @@ const ProductPreviewCard = ({product, count = 0, controlButtons, handleIncrement
                 <View style={{paddingVertical: 15, justifyContent: 'space-between'}}>
                     <Pressable
                         onPress={() => {
-                        }}>
+                        }}
+                        testID={'PPC.edit'}>
                         <AntDesign name={'edit'} size={20}/>
                     </Pressable>
                     <Pressable
                         style={{alignSelf: 'flex-end'}}
                         onPress={() => {
-                        }}>
+                        }}
+                        testID={'PPC.delete'}>
                         <Entypo name={'trash'} size={20}/>
                     </Pressable>
                 </View>
@@ -70,7 +72,8 @@ const ProductPreviewCard = ({product, count = 0, controlButtons, handleIncrement
                         onPress={() => {
                             handleIncrement(product);
                         }}
-                        style={styles.button}>
+                        style={styles.button}
+                        testID={'PPC.increment'}>
                         <Text style={{fontSize: 16, color: '#474747'}}>+</Text>
                     </Pressable>
                     <Text style={{marginLeft: 7, fontSize: 16}}>{count}</Text>
@@ -78,7 +81,8 @@ const ProductPreviewCard = ({product, count = 0, controlButtons, handleIncrement
                         onPress={() => {
                             handleDecrement(product);
                         }}
-                        style={styles.button}>
+                        style={styles.button}
+                        testID={'PPC.decrement'}>
                         <Text style={{fontSize: 16, color: '#474747'}}>-</Text>
                     </Pressable>
                 </View>
