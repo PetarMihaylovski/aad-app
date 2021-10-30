@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         margin: 10,
         width: '95%',
-        height: '90%'
+        height: '95%'
     },
     errorState: {
         marginVertical: 20,
