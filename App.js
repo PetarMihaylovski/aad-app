@@ -23,8 +23,8 @@ export default function App() {
         async function restoreSession() {
             await SecureStore.getItemAsync(SESSION_KEY)
                 .then(response => {
-                    const {user, token} = JSON.parse(response);
-                    userStore.restoreSession({user, token});
+                    const {user, token, ownsShop} = JSON.parse(response);
+                    userStore.restoreSession({user, token, ownsShop});
                     console.log('session restored');
                 })
                 .catch(() => console.log('ongoing session not found'));

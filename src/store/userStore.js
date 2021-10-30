@@ -41,6 +41,7 @@ class UserStore {
     deleteSession() {
         this.user = {};
         this.token = null;
+        this.ownsShop= false;
     }
 
     /**

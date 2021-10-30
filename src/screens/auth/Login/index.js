@@ -48,7 +48,8 @@ const LoginScreen = ({}) => {
                     // stores the session if user wants so
                     await SecureStore.setItemAsync(SESSION_KEY, JSON.stringify({
                         user: userStore.user,
-                        token: userStore.token
+                        token: userStore.token,
+                        ownsShop : userStore.ownsShop
                     }));
                     console.log('session stored successfully!')
                 }
