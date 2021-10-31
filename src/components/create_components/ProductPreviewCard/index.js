@@ -53,6 +53,7 @@ const ProductPreviewCard = ({product, count = 0, controlButtons, handleIncrement
                 <View style={{paddingVertical: 15, justifyContent: 'space-between'}}>
                     <Pressable
                         onPress={() => {
+                            console.warn('functionality not implemented')
                         }}
                         testID={'PPC.edit'}>
                         <AntDesign name={'edit'} size={20}/>
@@ -60,6 +61,7 @@ const ProductPreviewCard = ({product, count = 0, controlButtons, handleIncrement
                     <Pressable
                         style={{alignSelf: 'flex-end'}}
                         onPress={() => {
+                            console.warn('functionality not implemented')
                         }}
                         testID={'PPC.delete'}>
                         <Entypo name={'trash'} size={20}/>
